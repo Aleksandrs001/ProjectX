@@ -26,5 +26,6 @@ class ChangePasswordService
             return new Redirect("/login");
         }
     }
+
 }
 

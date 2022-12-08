@@ -26,4 +26,5 @@ class CoinMarketService
         }
         return $coinMarketCollection;
     }
+
 }

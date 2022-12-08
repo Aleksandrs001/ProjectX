@@ -48,5 +48,4 @@ class CoinMarket
     {
         return $this->price_change_24;
     }
-
 }

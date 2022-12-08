@@ -12,4 +12,3 @@ unset($_SESSION["login"]);
 unset($_SESSION["name"]);
 unset($_SESSION["email"]);
 unset($_SESSION["avatar"]);
-

@@ -35,5 +35,4 @@ class LoginService
             return new Redirect("/login");
         }
     }
-
 }

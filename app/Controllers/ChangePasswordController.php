@@ -19,4 +19,5 @@ class ChangePasswordController
         new ChangePasswordService($userInfo);
         return new Redirect("/login");
     }
+
 }

@@ -11,4 +11,5 @@ class LoginController
     {
         return new Template("login/login.twig");
     }
+
 }

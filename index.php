@@ -65,7 +65,6 @@ switch ($routeInfo[0]) {
             header("location:" . $response->getUrl());
 //            unset($_SESSION["message"]);
 
-
             break;
         }
 
