@@ -12,3 +12,4 @@ class ProfileController
         return new Template("profile/profile.twig");
     }
 }
+

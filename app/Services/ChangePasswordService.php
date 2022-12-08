@@ -25,7 +25,6 @@ class ChangePasswordService
             $_SESSION["message"] = "Current Password doesn't match new Password!";
             return new Redirect("/login");
         }
-
     }
 }
 

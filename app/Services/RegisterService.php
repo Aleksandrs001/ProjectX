@@ -39,4 +39,5 @@ class RegisterService
         }
         return new Redirect("/registration");
     }
+
 }

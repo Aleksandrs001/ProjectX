@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Services;
 
@@ -24,7 +24,6 @@ class CoinMarketService
                 $data->quote->USD->percent_change_24h
             ));
         }
-
         return $coinMarketCollection;
     }
 }

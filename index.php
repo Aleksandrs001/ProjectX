@@ -12,7 +12,6 @@ use App\Template;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $route) {
     $route->addRoute("GET", "/", [CoinMarketApiController::class, "showForm"]);
 //    $route->addRoute("GET", "/", [ArticlesController::class, "index"]);

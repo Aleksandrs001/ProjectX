@@ -51,4 +51,5 @@ class CoinMarketCapRepository
     {
         return $this->apiData;
     }
+
 }
