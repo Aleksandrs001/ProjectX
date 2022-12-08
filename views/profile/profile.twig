@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile</title>
+    <link rel="stylesheet" href="../../public/style/css.css">
+
+</head>
+<body>
+
+<div class="profileDate">
+    <h2> This is your profile, welcome {{ session.name }},<br> you successfully log in!</h2>
+    <img src="../../{{ session.avatar }}" alt="no avatar uploaded" height="100">
+    <div><h1>
+            Account id: {{ session.id }} <br> Name: {{ session.name }} <br> Login: {{ session.login }}<br>
+            Email: {{ session.email }}</h1>
+        <div>
+            <a href="../../app/logout.php" methods="get" id="1" class="logout">Logout</a>
+        </div>
+    </div>
+</div>
+{# <div class="email"> #}
+{#    <form action="/changeEmail" method="post"> #}
+{#        <div><label>Current Email</label> #}
+{#            <label> #}
+{#                <input type="email" name="oldEmail" placeholder="Enter Current email"> #}
+{#            </label></div> #}
+{#        <div><label>New Email</label> #}
+{#            <label> #}
+{#                <input type="email" name="newEmail" placeholder="Enter New email"> #}
+{#            </label></div> #}
+{#        <div><label>Repeat New Email</label> #}
+{#            <label> #}
+{#                <input type="email" name="reEmail" placeholder="Enter Repeat New email"> #}
+{#            </label></div> #}
+{#       <button type="submit">Change</button> #}
+{#    </form> #}
+{# </div> #}
+{# <div class="password"> #}
+{#    <form action="/changePassword" method="post"> #}
+{#        <div><label>CurrentPassword</label> #}
+{#            <label> #}
+{#                <input type="password" name="oldPassword" placeholder="Enter Current password"> #}
+{#            </label></div> #}
+{#        <div><label>New Password</label> #}
+{#            <label> #}
+{#                <input type="password" name="newPassword" placeholder="Enter New password"> #}
+{#            </label></div> #}
+{#        <div><label>Repeat New password</label> #}
+{#            <label> #}
+{#                <input type="password" name="reNewPassword" placeholder="Repeat New password"> #}
+{#            </label></div> #}
+{#      <button type="submit">Change</button> #}
+{#    </form> #}
+{# </div> #}
+
+</body>
+</html>
