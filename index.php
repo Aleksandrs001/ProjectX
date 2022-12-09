@@ -68,5 +68,4 @@ switch ($routeInfo[0]) {
 
             break;
         }
-
 }

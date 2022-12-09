@@ -20,4 +20,3 @@ class ChangePasswordController
         return new Redirect("/login");
     }
 }
-

@@ -49,3 +49,4 @@ class RegisterServiceRequest
         return $path;
     }
 }
+

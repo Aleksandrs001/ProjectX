@@ -41,3 +41,4 @@ class ChangePasswordServiceRequest
         return $this->id;
     }
 }
+

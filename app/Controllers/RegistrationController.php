@@ -30,4 +30,3 @@ class RegistrationController
         return new Redirect("/registration");
     }
 }
-

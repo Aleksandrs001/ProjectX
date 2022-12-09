@@ -16,4 +16,3 @@ class Redirect
         return $this->url;
     }
 }
-
