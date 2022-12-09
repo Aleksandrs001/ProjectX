@@ -27,4 +27,3 @@ class CoinMarketCollection
         return $this->coinMarketData;
     }
 }
-

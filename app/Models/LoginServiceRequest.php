@@ -48,4 +48,3 @@ class LoginServiceRequest
         return $this->id;
     }
 }
-

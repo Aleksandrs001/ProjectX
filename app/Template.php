@@ -23,3 +23,4 @@ class Template
         return $this->params;
     }
 }
+

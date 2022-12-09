@@ -17,3 +17,4 @@ class Logout
         return new Redirect("/login");
     }
 }
+
