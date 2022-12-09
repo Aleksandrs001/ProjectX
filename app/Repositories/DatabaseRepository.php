@@ -6,7 +6,6 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Dotenv\Dotenv;
 
-
 class DatabaseRepository
 {
     private static ?Connection $connection = null;

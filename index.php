@@ -7,7 +7,6 @@ use App\Controllers\CoinMarketApiController;
 use App\Controllers\LoginController;
 use App\Controllers\ProfileController;
 use App\Controllers\RegistrationController;
-use App\Logout;
 use App\Services\LoginService;
 use App\Template;
 use Twig\Environment ;
@@ -21,7 +20,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $route->addRoute("GET", "/login", [LoginController::class, "showForm"]);
     $route->addRoute("POST", "/login", [LoginService::class, "getIn"]);
     $route->addRoute("GET", "/profile", [ProfileController::class, "showForm"]);
-    $route->addRoute("GET", "/logout", [Logout::class, "logout"]);
+    $route->addRoute("GET", "/logout", [\App\Logout::class, "logout"]);
 //    $route->addRoute("POST", "/changeEmail", [ChangeEmailController::class,"showForm"]);
 //    $route->addRoute("POST", "/changePassword", [ChangePasswordController::class,"changePassword"]);
 });

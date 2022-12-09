@@ -4,17 +4,17 @@ namespace App\Models;
 
 class CoinMarket
 {
-    private string $id;
+    private int $id;
     private string $name;
     private string $symbol;
-    private string $price;
-    private string $price_change_24;
+    private float $price;
+    private float $price_change_24;
 
-    public function __construct(string $id,
+    public function __construct(int $id,
                                 string $name,
                                 string $symbol,
-                                string $price,
-                                string $price_change_24
+                                float $price,
+                                float $price_change_24
     )
     {
         $this->id = $id;
@@ -24,7 +24,7 @@ class CoinMarket
         $this->price_change_24 = $price_change_24;
     }
 
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }
@@ -39,12 +39,12 @@ class CoinMarket
         return $this->symbol;
     }
 
-    public function getPrice(): string
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    public function getPriceChange24(): string
+    public function getPriceChange24(): float
     {
         return $this->price_change_24;
     }

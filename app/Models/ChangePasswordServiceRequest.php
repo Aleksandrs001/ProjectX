@@ -7,9 +7,12 @@ class ChangePasswordServiceRequest
     private string $currentPassword;
     private string $newPassword;
     private string $reNewPassword;
-    private string $id;
+    private int $id;
 
-    public function __construct(string $currentPassword, string $newPassword, string $reNewPassword, string $id)
+    public function __construct(string $currentPassword,
+                                string $newPassword,
+                                string $reNewPassword,
+                                int $id)
     {
 
         $this->currentPassword = md5($currentPassword);
@@ -33,7 +36,7 @@ class ChangePasswordServiceRequest
         return $this->reNewPassword;
     }
 
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }

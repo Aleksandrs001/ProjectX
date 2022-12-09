@@ -15,7 +15,7 @@ class CoinMarketCapRepository
 
         $url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest';
         $parameters = [
-//            'id=1',
+
             'id' => '1,2,3,4,5,6,7,8,9,10',
 //            'start' => '1',
 //            'limit' => '100'

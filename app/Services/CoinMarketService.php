@@ -13,7 +13,6 @@ class CoinMarketService
         $marketApiResponse = new CoinMarketCapRepository();
         $coinMarketData = $marketApiResponse->getCoinMarketData();
         $coinMarketCollection = new CoinMarketCollection();
-        echo "<pre>";
 
         foreach ($coinMarketData->data as $data) {
             $coinMarketCollection->add(new CoinMarket(

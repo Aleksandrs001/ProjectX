@@ -10,7 +10,11 @@ class LoginServiceRequest
     private string $email;
     private string $avatar;
 
-    public function __construct(string $id, string $name, string $login, string $email, string $avatar)
+    public function __construct(string $id,
+                                string $name,
+                                string $login,
+                                string $email,
+                                string $avatar)
     {
         $this->id = $id;
         $this->name = $name;
