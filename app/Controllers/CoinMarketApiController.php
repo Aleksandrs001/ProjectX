@@ -14,3 +14,4 @@ class CoinMarketApiController
         return new Template("coinMarketApi/coinMarketApi.twig", ['response' => $aa->get()]);
     }
 }
+

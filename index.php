@@ -71,5 +71,3 @@ switch ($routeInfo[0]) {
         }
 
 }
-
-

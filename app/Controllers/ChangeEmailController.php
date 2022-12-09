@@ -41,5 +41,4 @@ class ChangeEmailController
         }
         return new Template("login/login.twig");
     }
-
 }
