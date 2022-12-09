@@ -21,15 +21,15 @@ class ChangeEmailController
         $newEmail = $_POST["newEmail"];
         $reEmail = $_POST["reEmail"];
         $accId = $_SESSION["id"];
-        $resultSet = DatabaseRepository::getConnection()->executeQuery('SELECT id, email FROM `news-api`.users WHERE id = ?', [$accId]);
+        $resultSet = DatabaseRepository::getConnection()->executeQuery('SELECT id, email FROM `crypto`.users WHERE id = ?', [$accId]);
         $user = $resultSet->fetchAssociative();
 
         if ($user["email"] == $oldEmail) {
             if ($newEmail === $reEmail) {
-                if (1 == DatabaseRepository::getConnection()->executeQuery("SELECT email FROM `news-api`.users WHERE email = '$newEmail' ")->rowCount()) {
+                if (1 == DatabaseRepository::getConnection()->executeQuery("SELECT email FROM `crypto`.users WHERE email = '$newEmail' ")->rowCount()) {
                     $_SESSION["message"] = "new Email already exist in DB";
                 } else {
-                    DatabaseRepository::getConnection()->Query(" UPDATE `news-api`.`users` SET `email` = '$newEmail' WHERE `id` = '$accId' ");
+                    DatabaseRepository::getConnection()->Query(" UPDATE `crypto`.`users` SET `email` = '$newEmail' WHERE `id` = '$accId' ");
                     $_SESSION["message"] = "You successfully changed Email";
                 }
             } else {
