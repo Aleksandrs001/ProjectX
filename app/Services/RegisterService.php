@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Collections\RegisterServiceCollection;
 use App\Redirect;
 use App\Repositories\DatabaseRepository;
+use App\Session;
 
 class RegisterService
 {
@@ -14,13 +15,13 @@ class RegisterService
         $userEmail = $request->getEmail();
         $emailFrom_DB = DatabaseRepository::getConnection()->executeQuery("SELECT email FROM users WHERE email = '$userEmail' ")->rowCount();
         if ($emailFrom_DB == 1) {
-            $_SESSION['errorMessage'] = "This email already in DB";
+            Session::put("errorMessage", "This email already in DB");
             return new Redirect("/registration");
         }
         $userLogin = $request->getLogin();
         $loginFrom_DB = DatabaseRepository::getConnection()->executeQuery("SELECT login FROM users WHERE login = '$userLogin' ")->rowCount();
         if ($loginFrom_DB == 1) {
-            $_SESSION['errorMessage'] = "This login already in DB";
+            Session::put("errorMessage", "This login already in DB");
             return new Redirect("/registration");
         }
 

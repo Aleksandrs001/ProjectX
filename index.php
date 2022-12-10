@@ -26,7 +26,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $route->addRoute("GET", "/login", [LoginController::class, "showForm"]);
     $route->addRoute("POST", "/login", [LoginService::class, "getIn"]);
     $route->addRoute("GET", "/profile", [ProfileController::class, "showForm"]);
-    $route->addRoute("GET", "/logout", [\App\Logout::class, "logout"]);
+    $route->addRoute("GET", "/logout", [\App\logout::class, "logout"]);
 //    $route->addRoute("POST", "/changeEmail", [ChangeEmailController::class,"showForm"]);
 //    $route->addRoute("POST", "/changePassword", [ChangePasswordController::class,"changePassword"]);
 });
@@ -65,7 +65,7 @@ switch ($routeInfo[0]) {
         if ($response instanceof Template) {
             echo $twig->render($response->getPath(), $response->getParams());
 //            var_dump($response);
-//            unset($_SESSION['message']);
+         unset($_SESSION['message']);
             break;
         }
         if ($response instanceof \App\Redirect) {

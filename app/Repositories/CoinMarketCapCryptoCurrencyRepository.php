@@ -15,33 +15,34 @@ class CoinMarketCapCryptoCurrencyRepository implements CryptoCurrenciesRepositor
     public function __construct()
     {
 
-        $this->httpClient = new Client(["base_uri" =>self::API_URL]);
-}
+        $this->httpClient = new Client(["base_uri" => self::API_URL]);
+    }
+
     public function fetchAllBySymbols(array $symbols): CryptoCurrenciesCollection
     {
         $response = $this->httpClient->request('GET', 'quotes/latest', [
-            "headers" =>[
+            "headers" => [
                 "Accepts" => "application/json",
                 "X-CMC_PRO_API_KEY" => $_ENV["SECRET_KEY"]
             ],
-            "query"=> [
-            "symbol" => implode(",", $symbols),
-            "convert" => "USD"
-                ]
+            "query" => [
+                "symbol" => implode(",", $symbols),
+                "convert" => "USD"
+            ]
         ]);
         $response = json_decode($response->getBody()->getContents());
 
-      $cryptoCurrencies= new CryptoCurrenciesCollection();
+        $cryptoCurrencies = new CryptoCurrenciesCollection();
 
         foreach ($response->data as $currency) {
             $cryptoCurrencies->add(new CryptoCurrency(
-                $currency->symbol,
-                $currency->name,
-                $currency->quote->USD->price,
-                $currency->quote->USD->percent_change_1h,
-                $currency->quote->USD->percent_change_24h,
-                $currency->quote->USD->percent_change_7d
-            )
+                    $currency->symbol,
+                    $currency->name,
+                    $currency->quote->USD->price,
+                    $currency->quote->USD->percent_change_1h,
+                    $currency->quote->USD->percent_change_24h,
+                    $currency->quote->USD->percent_change_7d
+                )
             );
         }
         return $cryptoCurrencies;

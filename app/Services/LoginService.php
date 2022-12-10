@@ -24,7 +24,7 @@ class LoginService
             $user["avatar"]
         );
         if ($login == $user["login"] && $user["password"] == $password) {
-            Session::put("id",$objDB->getId());
+            Session::put("id", $objDB->getId());
             Session::put("name", $objDB->getName());
             Session::put("login", $objDB->getLogin());
             Session::put("email", $objDB->getEmail());

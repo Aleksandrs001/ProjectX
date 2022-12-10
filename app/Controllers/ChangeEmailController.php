@@ -31,14 +31,14 @@ class ChangeEmailController
                     $_SESSION["message"] = "new Email already exist in DB";
                 } else {
                     DatabaseRepository::getConnection()->Query(" UPDATE `crypto`.`users` SET `email` = '$newEmail' WHERE `id` = '$accId' ");
-                  Session::put("message", "You successfully changed Email");
+                    Session::put("message", "You successfully changed Email");
                 }
             } else {
-                Session::put("message","New email and repeat email- not the same");
+                Session::put("message", "New email and repeat email- not the same");
             }
             return new Redirect("/registration");
         } else {
-            Session::put("message","Incorrect Current Email");
+            Session::put("message", "Incorrect Current Email");
         }
         return new Template("login/login.twig");
     }

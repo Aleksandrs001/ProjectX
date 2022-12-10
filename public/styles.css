@@ -1,20 +1,22 @@
-.name-4xl{
-    position: absolute;
-    top: 0px;
-    right: 5px;
+
+.containers {
+    margin-bottom: 200px;
+    margin-top: 20px;
 }
-.logout1{
-    position: absolute;
-    top: 50px;
-    right:20px;
+
+#1 {
+
 }
-.login1{
-    position: absolute;
-    top: 70px;
-    right: 20px;
+
+.searchBar {
+
+    width: 15%;
+
+    margin: 0 auto;
 }
-.register1{
-    position: absolute;
-    top: 90px;
-    right: 20px;
+
+.welcome {
+    font-weight: bold;
+    text-align: center;
+    font-size: 60px;
 }

@@ -12,8 +12,8 @@ class CryptoCurrencyController
 
         $service = new ListCryptoCurrenciesService();
         $cryptoCurrencies = $service->execute(
-            explode("," , $_GET["symbols"] ?? "BTC,ETH,LTC,DOGE"
-        )
+            explode(",", $_GET["symbols"] ?? "BTC,ETH,LTC,DOGE"
+            )
         );
 
         return new Template("coinMarketApi/coinMarketApi.twig", [

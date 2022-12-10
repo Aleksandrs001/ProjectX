@@ -14,7 +14,8 @@ class Logout
         unset($_SESSION["name"]);
         unset($_SESSION["email"]);
         unset($_SESSION["avatar"]);
-        return new Redirect("/login");
+        unset($_SESSION["greetings"]);
+        return new Redirect("/");
     }
 }
 

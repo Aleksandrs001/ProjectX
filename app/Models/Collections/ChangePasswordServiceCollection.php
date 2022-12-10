@@ -12,7 +12,7 @@ class ChangePasswordServiceCollection
     public function __construct(string $currentPassword,
                                 string $newPassword,
                                 string $reNewPassword,
-                                int $id)
+                                int    $id)
     {
 
         $this->currentPassword = md5($currentPassword);

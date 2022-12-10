@@ -7,74 +7,109 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../../public/styles.css">
     <title>CoinMarketCap</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
 
 
-
-
 </head>
-<div class="mx-auto w-full text-center text-xxl font-bold">
-    <p class="text-xxl font-bold">CoinMarketCap</p>
+<body>
+
+
+<div>
+    <h4 class="welcome">CoinMarketCap</h4>
 </div>
-<div class="container mx-auto px-4 relative">
-    <ul class="absolute right-0 top-0 shadow-md">
+
+
+<div class="containers mx-auto px-7 relative" id="1">
+    <ul class="absolute right-10 top-0 shadow-md">
+        {% if session.name %}
+            <p class="font-bold">Welcome {{ session.name }}</p> <br>
+        {% endif %}
+
         <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
             <a href="/" class="hover:bg-gray-700">Home</a>
         </li>
-        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-            <a href="/login" class="hover:bg-gray-700">Log In</a>
-        </li>
-        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-            <a href="/registration" class="hover:bg-gray-700">Register</a>
-        </li>
+
+
+        {% if not session.name %}
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                <a href="/login" class="hover:bg-gray-700">Log In</a>
+            </li>
+        {% endif %}
+
+        {% if not session.name %}
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                <a href="/registration" class="hover:bg-gray-700">Register</a>
+            </li>
+        {% endif %}
+
         <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
             <a href="/logout" class="hover:bg-gray-700">Log Out</a>
         </li>
     </ul>
 </div>
 <body>
+<form class="max-w-sm mx-auto mt-10 center mx-auto" method="get">
+    <input class="form-input rounded-lg shadow-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+           type="text" name="symbols" value="" placeholder="Search">
+    <button class="bg-blue-500 hover:bg-blue-700 rounded-lg shadow-lg py-2 px-3 text-white font-bold mt-3 focus:outline-none focus:shadow-outline"
+            type="submit">Search
+    </button>
+</form>
 
 
+{% for responc in response %}
 
-<div>
-    <div class="container mx-auto px-4">
-        {% for responc in response %}
-            <a href="/?symbols={{ responc.getSymbol }}" methods="get" class="block rounded bg-gray-200 hover:bg-gray-300 px-3 py-2 mb-4 text-gray-700 font-semibold">
+
+    <div>
+        <div class="container  m-14 mx-auto px-4">
+
+            <a href="/?symbols={{ responc.getSymbol }}" methods="get"
+               class="block rounded bg-gray-200 hover:bg-gray-300 px-3 py-2 mb-4 text-gray-700 font-semibold">
                 <h2 class="text-xl font-bold">{{ responc.getSymbol }}</h2>
                 <p>{{ responc.getName }}</p>
-                <button class="px-4 py-2 rounded bg-green-500 text-white font-bold mr-4">
-                    Buy
-                </button>
-                <button class="px-4 py-2 rounded bg-red-500 text-white font-bold">
-                    Sell
-                </button>
 
-                {% if responc.getPrice < 0 %}
-                    <p class="text-xl font-bold text-red-500">{{ responc.getPrice }}</p>
-                {% else %}
-                    <p class="text-xl font-bold">{{ responc.getPrice }}</p>
-                {% endif %}
+
+                <p class="text-xl font-bold">{{ responc.getPrice|number_format(3) }} $</p>
+
                 {% if responc.getPercentChange1h < 0 %}
-                    <p class="text-red-500">{{ responc.getPercentChange1h }}</p>
+                    <p class="text-red-500">{{ responc.getPercentChange1h|number_format(3) }}%</p>
                 {% else %}
-                    <p>{{ responc.getPercentChange1h }}</p>
+                    <p>{{ responc.getPercentChange1h|number_format(3) }}%</p>
                 {% endif %}
+
                 {% if responc.getPercentChange24h < 0 %}
-                    <p class="text-red-500">{{ responc.getPercentChange24h }}</p>
+                    <p class="text-red-500">{{ responc.getPercentChange24h|number_format(3) }}%</p>
                 {% else %}
-                    <p>{{ responc.getPercentChange24h }}</p>
+                    <p>{{ responc.getPercentChange24h|number_format(3) }}%</p>
                 {% endif %}
-                {% if responc.getPercentChange7d
-                    < 0 %}
-                    <p class="text-red-500">{{ responc.getPercentChange7d }}</p>
+
+                {% if responc.getPercentChange7d < 0 %}
+                    <p class="text-red-500">{{ responc.getPercentChange7d|number_format(3) }}%</p>
                 {% else %}
-                    <p>{{ responc.getPercentChange7d }}</p>
+                    <p>{{ responc.getPercentChange7d|number_format(3) }}%</p>
                 {% endif %}
             </a>
-        {% endfor %}
+            {% if  session.name %}
+                <form method="post">
+                    <label>
+                        <input type="number" placeholder="Enter amount">
+                    </label>
+                    <button class="px-4 py-2 rounded bg-green-500 text-white font-bold mr-4" type="submit" name="buy">
+                        Buy
+                    </button>
+                    <label>
+                        <input type="number" placeholder="Enter amount">
+                    </label>
+                    <button class="px-4 py-2 rounded bg-red-500 text-white font-bold" type="submit" name="sell">
+                        Sell
+                    </button>
+                </form>
+            {% endif %}
+        </div>
     </div>
-</div>
 
+{% endfor %}
 
 
 <button class="px-4 py-2 rounded bg-indigo-500 text-white font-bold">
@@ -82,6 +117,4 @@
 </button>
 </body>
 
-</html>
-</body>
 </html>

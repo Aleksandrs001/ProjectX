@@ -44,8 +44,8 @@ class RegisterServiceCollection
         $path = 'uploads/' . time() . $this->avatar['name'];
         if (!move_uploaded_file($this->avatar['tmp_name'], $path)) {
             $_SESSION['message'] = "Error uploading Avatar";
-            return "<null>" ;
-        };
+            return "<null>";
+        }
         return $path;
     }
 }

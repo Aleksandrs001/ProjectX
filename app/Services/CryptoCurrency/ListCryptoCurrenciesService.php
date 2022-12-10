@@ -8,7 +8,7 @@ use App\Repositories\CryptoCurrenciesRepository;
 
 class ListCryptoCurrenciesService
 {
-    private  CryptoCurrenciesRepository $cryptoCurrenciesRepository;
+    private CryptoCurrenciesRepository $cryptoCurrenciesRepository;
 
     public function __construct()
     {
