@@ -1,10 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace App\Models\Collections;
 
-use App\Models\CoinMarket;
-
-class CoinMarketCollection
+class CryptoCurrenciesCollection
 {
 
     private array $coinMarketData = [];
@@ -17,12 +15,12 @@ class CoinMarketCollection
         }
     }
 
-    public function add(CoinMarket $coinMarket): void
+    public function add(CryptoCurrenciesCollection $coinMarket): void
     {
         $this->coinMarketData [] = $coinMarket;
     }
 
-    public function get(): array
+    public function all(): array
     {
         return $this->coinMarketData;
     }

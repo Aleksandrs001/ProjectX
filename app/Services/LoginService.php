@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\LoginServiceRequest;
+use App\Models\Collections\LoginServiceCollection;
 use App\Redirect;
 use App\Repositories\DatabaseRepository;
+use App\Session;
 
 class LoginService
 {
@@ -15,7 +16,7 @@ class LoginService
 
         $resultSet = DatabaseRepository::getConnection()->executeQuery('SELECT * FROM users WHERE login = ?', [$login]);
         $user = $resultSet->fetchAssociative();
-        $objDB = new LoginServiceRequest(
+        $objDB = new LoginServiceCollection(
             $user["id"],
             $user["name"],
             $user["login"],
@@ -23,15 +24,15 @@ class LoginService
             $user["avatar"]
         );
         if ($login == $user["login"] && $user["password"] == $password) {
-            $_SESSION['id'] = $objDB->getId();
-            $_SESSION["name"] = $objDB->getName();
-            $_SESSION["login"] = $objDB->getLogin();
-            $_SESSION["email"] = $objDB->getEmail();
-            $_SESSION["avatar"] = $objDB->getAvatar();
-            $_SESSION["message"] = "You successful login in";
+            Session::put("id",$objDB->getId());
+            Session::put("name", $objDB->getName());
+            Session::put("login", $objDB->getLogin());
+            Session::put("email", $objDB->getEmail());
+            Session::put("avatar", $objDB->getAvatar());
+            Session::put("message", "You successful login in");
             return new Redirect("/profile");
         } else {
-            $_SESSION["message"] = "Login or password incorrect";
+            Session::put("message", "Login or password incorrect");
             return new Redirect("/login");
         }
     }

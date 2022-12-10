@@ -8,25 +8,78 @@
     <link rel="stylesheet" href="../../public/styles.css">
     <title>CoinMarketCap</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <h1 class="header">CoinMarketCap</h1>
+
+
+
 
 </head>
-<body>
-<form class="register" action="/registration" method="get">
-
-    <button type="submit">Register now</button>
-</form>
-<div>
-
-{% for responc in response %}
-
-    <h2>  {{ responc.getId }}
-        {{ responc.getName }}
-        {{ responc.getSymbol }}
-        {{ responc.getPrice }}
-        {{ responc.getPriceChange24 }} </h2>
-{% endfor %}
+<div class="mx-auto w-full text-center text-xxl font-bold">
+    <p class="text-xxl font-bold">CoinMarketCap</p>
 </div>
+<div class="container mx-auto px-4 relative">
+    <ul class="absolute right-0 top-0 shadow-md">
+        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+            <a href="/" class="hover:bg-gray-700">Home</a>
+        </li>
+        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+            <a href="/login" class="hover:bg-gray-700">Log In</a>
+        </li>
+        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+            <a href="/registration" class="hover:bg-gray-700">Register</a>
+        </li>
+        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+            <a href="/logout" class="hover:bg-gray-700">Log Out</a>
+        </li>
+    </ul>
+</div>
+<body>
+
+
+
+<div>
+    <div class="container mx-auto px-4">
+        {% for responc in response %}
+            <a href="/?symbols={{ responc.getSymbol }}" methods="get" class="block rounded bg-gray-200 hover:bg-gray-300 px-3 py-2 mb-4 text-gray-700 font-semibold">
+                <h2 class="text-xl font-bold">{{ responc.getSymbol }}</h2>
+                <p>{{ responc.getName }}</p>
+                <button class="px-4 py-2 rounded bg-green-500 text-white font-bold mr-4">
+                    Buy
+                </button>
+                <button class="px-4 py-2 rounded bg-red-500 text-white font-bold">
+                    Sell
+                </button>
+
+                {% if responc.getPrice < 0 %}
+                    <p class="text-xl font-bold text-red-500">{{ responc.getPrice }}</p>
+                {% else %}
+                    <p class="text-xl font-bold">{{ responc.getPrice }}</p>
+                {% endif %}
+                {% if responc.getPercentChange1h < 0 %}
+                    <p class="text-red-500">{{ responc.getPercentChange1h }}</p>
+                {% else %}
+                    <p>{{ responc.getPercentChange1h }}</p>
+                {% endif %}
+                {% if responc.getPercentChange24h < 0 %}
+                    <p class="text-red-500">{{ responc.getPercentChange24h }}</p>
+                {% else %}
+                    <p>{{ responc.getPercentChange24h }}</p>
+                {% endif %}
+                {% if responc.getPercentChange7d
+                    < 0 %}
+                    <p class="text-red-500">{{ responc.getPercentChange7d }}</p>
+                {% else %}
+                    <p>{{ responc.getPercentChange7d }}</p>
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+<button class="px-4 py-2 rounded bg-indigo-500 text-white font-bold">
+    Buy/Sell
+</button>
 </body>
 
 </html>

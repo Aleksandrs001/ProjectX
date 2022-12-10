@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
-use App\Models\RegisterServiceRequest;
+use App\Models\Collections\RegisterServiceCollection;
 use App\Redirect;
 use App\Repositories\DatabaseRepository;
 
 class RegisterService
 {
 
-    public function execute(RegisterServiceRequest $request): Redirect
+    public function execute(RegisterServiceCollection $request): Redirect
     {
         $userEmail = $request->getEmail();
         $emailFrom_DB = DatabaseRepository::getConnection()->executeQuery("SELECT email FROM users WHERE email = '$userEmail' ")->rowCount();

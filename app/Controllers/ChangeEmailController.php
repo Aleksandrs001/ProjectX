@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Redirect;
 use App\Repositories\DatabaseRepository;
+use App\Session;
 use App\Template;
 
 class ChangeEmailController
@@ -30,14 +31,14 @@ class ChangeEmailController
                     $_SESSION["message"] = "new Email already exist in DB";
                 } else {
                     DatabaseRepository::getConnection()->Query(" UPDATE `crypto`.`users` SET `email` = '$newEmail' WHERE `id` = '$accId' ");
-                    $_SESSION["message"] = "You successfully changed Email";
+                  Session::put("message", "You successfully changed Email");
                 }
             } else {
-                $_SESSION["message"] = "New email and repeat email- not the same";
+                Session::put("message","New email and repeat email- not the same");
             }
             return new Redirect("/registration");
         } else {
-            $_SESSION["message"] = "Incorrect Current Email";
+            Session::put("message","Incorrect Current Email");
         }
         return new Template("login/login.twig");
     }

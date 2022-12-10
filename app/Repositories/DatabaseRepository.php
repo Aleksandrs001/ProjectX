@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
-use Dotenv\Dotenv;
+
 
 class DatabaseRepository
 {
@@ -12,14 +12,13 @@ class DatabaseRepository
 
     public static function getConnection(): ?Connection
     {
-        $dotenv = Dotenv::createImmutable('dotenv');
         if (self::$connection == null) {
             $connectionParams = [
-                'dbname' => $dotenv->load()["DBNAME"],
-                'user' => $dotenv->load()["USER"],
-                'password' => $dotenv->load()["DB_KEY"],
-                'host' => $dotenv->load()["HOST"],
-                'driver' => $dotenv->load()["DRIVER"],
+                'dbname' => $_ENV["DBNAME"],
+                'user' => $_ENV["USER"],
+                'password' => $_ENV["DB_KEY"],
+                'host' => $_ENV["HOST"],
+                'driver' => $_ENV["DRIVER"],
             ];
             self::$connection = DriverManager::getConnection($connectionParams);
         }

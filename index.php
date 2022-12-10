@@ -1,19 +1,25 @@
 <?php declare(strict_types=1);
 
 require_once 'vendor/autoload.php';
-session_start();
 
-use App\Controllers\CoinMarketApiController;
+use App\Controllers\CryptoCurrencyController;
 use App\Controllers\LoginController;
 use App\Controllers\ProfileController;
 use App\Controllers\RegistrationController;
 use App\Services\LoginService;
+use App\Session;
 use App\Template;
+use Dotenv\Dotenv;
 use Twig\Environment ;
 use Twig\Loader\FilesystemLoader;
 
+Session::initialize();
+
+$dotenv = Dotenv::createImmutable('dotenv');
+$dotenv->load();
+
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $route) {
-    $route->addRoute("GET", "/", [CoinMarketApiController::class, "showForm"]);
+    $route->addRoute("GET", "/", [CryptoCurrencyController::class, "index"]);
 //    $route->addRoute("GET", "/", [ArticlesController::class, "index"]);
     $route->addRoute("GET", "/registration", [RegistrationController::class, "showForm"]);
     $route->addRoute("POST", "/registration", [RegistrationController::class, "store"]);

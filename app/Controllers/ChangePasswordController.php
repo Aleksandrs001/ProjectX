@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\ChangePasswordServiceRequest;
+use App\Models\Collections\ChangePasswordServiceCollection;
 use App\Redirect;
 use App\Services\ChangePasswordService;
 
@@ -11,7 +11,7 @@ class ChangePasswordController
 
     public function changePassword(): Redirect
     {
-        $userInfo = new ChangePasswordServiceRequest($_POST["oldPassword"],
+        $userInfo = new ChangePasswordServiceCollection($_POST["oldPassword"],
             $_POST["newPassword"],
             $_POST["reNewPassword"],
             $_SESSION["id"]

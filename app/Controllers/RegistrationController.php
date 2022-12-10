@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\RegisterServiceRequest;
+use App\Models\Collections\RegisterServiceCollection;
 use App\Redirect;
 use App\Services\RegisterService;
 use App\Template;
@@ -19,7 +19,7 @@ class RegistrationController
     {
         $registerService = new RegisterService();
         $registerService->execute(
-            new RegisterServiceRequest(
+            new RegisterServiceCollection(
                 $_POST['name'],
                 $_POST['login'],
                 $_POST['email'],
