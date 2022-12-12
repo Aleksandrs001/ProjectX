@@ -61,7 +61,7 @@
 
 
 <form>
-    <label for="user-choice">Choose an option:</label>
+    <label for="user-choice">Choose Coin:</label>
     <select id="user-choice" name="user-choice">
         {% for respond in response %}
         <option value={{ respond.getSymbol }}>{{ respond.getSymbol }}</option>

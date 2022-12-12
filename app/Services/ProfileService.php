@@ -18,7 +18,7 @@ class ProfileService
      $putIntoDB =$_POST["toMoneyBag"];
      if($putIntoDB <=0) {
 
-         $_SESSION["message"]= "You can't put negative amount of money into your money bag";
+         $_SESSION["message"]= "You can't put negative amount of money into your wallet";
          return new Redirect("/profile");
      }else{
          DatabaseRepository::getConnection()->executeQuery(
@@ -28,7 +28,7 @@ class ProfileService
                                       buy_date= ?',
              [$putIntoDB, $_SESSION["id"], $date]
          );
-            $_SESSION["message"]= "You have successfully put money into your money bag";
+            $_SESSION["message"]= "You have successfully put money into your wallet";
 
      }
 
