@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Collections\LoginServiceCollection;
+use App\Models\LoginServiceRequest;
 use App\Redirect;
 use App\Repositories\DatabaseRepository;
 use App\Session;
@@ -16,7 +16,7 @@ class LoginService
 
         $resultSet = DatabaseRepository::getConnection()->executeQuery('SELECT * FROM users WHERE login = ?', [$login]);
         $user = $resultSet->fetchAssociative();
-        $objDB = new LoginServiceCollection(
+        $objDB = new LoginServiceRequest(
             $user["id"],
             $user["name"],
             $user["login"],

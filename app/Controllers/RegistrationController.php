@@ -2,7 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\Collections\RegisterServiceCollection;
+use App\Models\RegisterServiceRequest;
+
 use App\Redirect;
 use App\Services\RegisterService;
 use App\Template;
@@ -17,9 +18,10 @@ class RegistrationController
 
     public function store(): Redirect
     {
+
         $registerService = new RegisterService();
         $registerService->execute(
-            new RegisterServiceCollection(
+            new RegisterServiceRequest(
                 $_POST['name'],
                 $_POST['login'],
                 $_POST['email'],

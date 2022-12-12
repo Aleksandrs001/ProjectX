@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Models\Collections;
+namespace App\Models;
 
-class LoginServiceCollection
+class LoginServiceRequest
 {
     private string $id;
     private string $name;

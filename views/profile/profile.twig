@@ -20,7 +20,28 @@
             <a href="/logout" methods="get" id="1" class="logout">Logout</a><br>
             <a href="/">Home</a>
         </div>
+        <form action="/profile"  method="post">
+            <label>
+                <input type="number" name="toMoneyBag" placeholder="Enter amount">$
+            </label>
+            <button class="px-4 py-2 rounded bg-grey-500 text-white font-bold mr-4" type="submit">
+                Send to wallet
+            </button>
     </div>
+
+    {% for user in userData %}
+        <br>
+
+         [1] Symbol: {{ user.getCoinSymbol }} |
+         [2] Coin amount: {{ user.getCoinAmount }} |
+         [3] Coin price: {{ user.getCoinPrice }}$ |
+         [4] Buy date: {{ user.buyDate }} |
+         [5] Sell date:  {{ user.sellDate }} |
+         [6] Money in wallet: {{ user.moneyBag }}$ |<br><br>
+
+    {% endfor %}
+
+    {{ session.message }}
 </div>
 {# <div class="email"> #}
 {#    <form action="/changeEmail" method="post"> #}

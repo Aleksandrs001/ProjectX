@@ -61,12 +61,16 @@
 {% for respond in response %}
 
 
+
+
+
+
     <div>
         <div class="container  m-14 mx-auto px-4">
 
-            <a href="/readyToBuy"  methods="get"
+            <h href="/?symbols={{ respond.getSymbol }}" methods="get" method="post={{ respond.getSymbol }}"
                class="block rounded bg-gray-200 hover:bg-gray-300 px-3 py-2 mb-4 text-gray-700 font-semi-bold">
-                <h2 class="text-xl font-bold">{{ responc.getSymbol }}</h2>
+                <h2 class="text-xl font-bold">{{ respond.getSymbol }}</h2>
                 <p>{{ respond.getName }}</p>
 
 
@@ -78,7 +82,7 @@
                     <p>{{ respond.getPercentChange1h|number_format(3) }}%</p>
                 {% endif %}
 
-                {% if responc.getPercentChange24h < 0 %}
+                {% if respond.getPercentChange24h < 0 %}
                     <p class="text-red-500">{{ respond.getPercentChange24h|number_format(3) }}%</p>
                 {% else %}
                     <p>{{ respond.getPercentChange24h|number_format(3) }}%</p>
@@ -89,7 +93,22 @@
                 {% else %}
                     <p>{{ respond.getPercentChange7d|number_format(3) }}%</p>
                 {% endif %}
-            </a>
+            </h>
+
+                <form action="/readyToBuy" method="post">
+                    <label>
+                        <input type="number" name="buy" placeholder="Enter amount">
+                    </label>
+                    <button class="px-4 py-2 rounded bg-green-500 text-white font-bold mr-4" type="submit" >
+                        Buy
+                    </button>
+                    <label>
+                        <input type="number" name="sell" placeholder="Enter amount">
+                    </label>
+                    <button class="px-4 py-2 rounded bg-red-500 text-white font-bold" type="submit" >
+                        Sell
+                    </button>
+                </form>
 
         </div>
     </div>

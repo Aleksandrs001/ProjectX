@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Models\Collections;
+namespace App\Models;
 
-class RegisterServiceCollection
+class RegisterServiceRequest
 {
     private string $name;
     private string $email;
@@ -10,7 +10,12 @@ class RegisterServiceCollection
     private string $login;
     private array $avatar;
 
-    public function __construct(string $name, string $login, string $email, string $password, array $avatar)
+    public function __construct(string $name,
+                                string $login,
+                                string $email,
+                                string $password,
+                                array $avatar
+    )
     {
         $this->name = $name;
         $this->login = $login;

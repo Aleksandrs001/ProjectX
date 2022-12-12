@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Models\Collections;
+namespace App\Models;
 
-class ChangePasswordServiceCollection
+class ChangePasswordServiceRequest
 {
     private string $currentPassword;
     private string $newPassword;

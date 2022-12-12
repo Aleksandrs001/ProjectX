@@ -6,7 +6,6 @@ use App\Template;
 
 class LoginController
 {
-
     public function showForm(): Template
     {
         return new Template("login/login.twig");

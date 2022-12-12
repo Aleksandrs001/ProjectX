@@ -9,7 +9,7 @@ class CryptoCurrencyController
 {
     public function index(): Template
     {
-
+        var_dump($_GET);
         $service = new ListCryptoCurrenciesService();
         $cryptoCurrencies = $service->execute(
             explode(",", $_GET["symbols"] ?? "BTC,ETH,LTC,DOGE"
