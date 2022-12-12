@@ -4,13 +4,14 @@ namespace App\Controllers;
 
 use App\Repositories\DatabaseRepository;
 use App\Services\CryptoCurrency\ListCryptoCurrenciesService;
+use App\Session;
 use App\Template;
 
 class ReadyToBuyController
 {
     public function showForm(): Template
     {
-var_dump($_POST);
+
         $service = new ListCryptoCurrenciesService();
         $cryptoCurrencies = $service->execute(
             explode(",", $_GET["symbols"] ?? "DOGE"

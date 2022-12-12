@@ -29,17 +29,19 @@
             </button>
     </div>
 
+
     {% for user in userData %}
-        <br>
-
-         [1] Symbol: {{ user.getCoinSymbol }} |
-         [2] Coin amount: {{ user.getCoinAmount }} |
-         [3] Coin price: {{ user.getCoinPrice }}$ |
-         [4] Buy date: {{ user.buyDate }} |
-         [5] Sell date:  {{ user.sellDate }} |
-         [6] Money in wallet: {{ user.moneyBag }}$ |<br><br>
-
+        <p>
+            <b>[1] Symbol:</b> {{ user.getCoinSymbol }} |
+            <b>[2] Coin amount:</b> {{ user.getCoinAmount }} |
+            <b>[3] Coin price:</b> {{ user.getCoinPrice }}$ |
+            <b>[4] Buy date:</b> {{ user.buyDate }} |
+            <b>[5] Sell date:</b> {{ user.sellDate }} |
+            <b>[6] Money in wallet:</b> {{ user.moneyBag }}$
+        </p>
     {% endfor %}
+
+
 
     {{ session.message }}
 </div>

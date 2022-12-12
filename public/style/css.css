@@ -64,3 +64,13 @@ button {
     margin: 10px 0;
     padding: 10px;
 }
+p {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+b {
+    font-weight: bold;
+    color: #0099cc;
+}
