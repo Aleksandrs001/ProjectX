@@ -61,8 +61,8 @@
 
 
 <form>
-    <label for="user-choice">Choose Coin:</label>
-    <select id="user-choice" name="user-choice">
+    <label for="/symbols">Choose Coin:</label>
+    <select id="/symbols" name="/symbols">
         {% for respond in response %}
         <option value={{ respond.getSymbol }}>{{ respond.getSymbol }}</option>
         {% endfor %}
@@ -79,7 +79,7 @@
     <div>
         <div class="container  m-14 mx-auto px-4">
 
-            <a href="/readyToBuy"  methods="get"
+            <a href="/crypto{{ respond.getSymbol }}"  methods="get"
                class="block rounded bg-gray-200 hover:bg-gray-300 px-3 py-2 mb-4 text-gray-700 font-semi-bold">
                 <h2 class="text-xl font-bold">{{ respond.getSymbol }}</h2>
                 <p>{{ respond.getName }}</p>
@@ -112,9 +112,6 @@
 {% endfor %}
 
 
-<button class="px-4 py-2 rounded bg-indigo-500 text-white font-bold">
-    Buy/Sell
-</button>
 </body>
 
 </html>

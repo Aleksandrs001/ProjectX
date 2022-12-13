@@ -11,6 +11,7 @@ class CoinMarketCapCryptoCurrencyRepository implements CryptoCurrenciesRepositor
 
     private const API_URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/';
     private Client $httpClient;
+    public $cryptoCurrencies;
 
     public function __construct()
     {
@@ -32,7 +33,7 @@ class CoinMarketCapCryptoCurrencyRepository implements CryptoCurrenciesRepositor
         ]);
         $response = json_decode($response->getBody()->getContents());
 
-        $cryptoCurrencies = new CryptoCurrenciesCollection();
+       $cryptoCurrencies = new CryptoCurrenciesCollection();
 
         foreach ($response->data as $currency) {
             $cryptoCurrencies->add(new CryptoCurrency(
@@ -47,4 +48,7 @@ class CoinMarketCapCryptoCurrencyRepository implements CryptoCurrenciesRepositor
         }
         return $cryptoCurrencies;
     }
+
+
+
 }

@@ -23,7 +23,7 @@ $dotenv->load();
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $route) {
     $route->addRoute("GET", "/", [CryptoCurrencyController::class, "index"]);
-//    $route->addRoute("GET", "/", [ArticlesController::class, "index"]);
+    $route->addRoute("GET", "/crypto{symbol}", [CryptoCurrencyController::class, "showForm"]);
     $route->addRoute("GET", "/registration", [RegistrationController::class, "showForm"]);
     $route->addRoute("POST", "/registration", [RegistrationController::class, "store"]);
     $route->addRoute("GET", "/login", [LoginController::class, "showForm"]);
@@ -32,7 +32,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $route->addRoute("GET", "/logout", [logout::class, "logout"]);
     $route->addRoute("POST", "/profile", [ProfileService::class, "moneyTransfer"]);
     $route->addRoute("GET", "/readyToBuy", [ReadyToBuyController::class, "showForm"]);
-    $route->addRoute("POST", "/readyToBuy", [ReadyToBuyController::class, "buySell"]);
+    $route->addRoute("POST", "/crypto{symbol}", [ReadyToBuyController::class, "buySell"]);
 //    $route->addRoute("POST", "/changeEmail", [ChangeEmailController::class,"showForm"]);
 //    $route->addRoute("POST", "/changePassword", [ChangePasswordController::class,"changePassword"]);
 });

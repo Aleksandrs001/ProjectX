@@ -11,10 +11,29 @@ use App\Template;
 class ProfileController
 {
 
+
+
+
+    public function getTotalInMoneyBag(): int
+    {
+
+        $resultSet=  DatabaseRepository::getConnection()->executeQuery(
+            'select money_bag from users_crypto_profiles where user_id = ?', [ $_SESSION["id"] ]);
+        $user = $resultSet->fetchAllAssociative();
+       $items=0;
+
+        foreach ($user as $item){
+            $items+=(int)$item["money_bag"];
+        }
+
+        return $items;
+    }
+
     public function showForm(): Template
     {
 
-        return new Template("profile/profile.twig", ["userData"=>$this->walletStatus()->all()]);
+        $items = $this->getTotalInMoneyBag();
+        return new Template("profile/profile.twig", ["userData"=>$this->walletStatus()->all(),"items"=>$items]);
     }
 
     public function walletStatus(): CryptoCurrenciesCollection
@@ -43,6 +62,9 @@ FROM users_crypto_profiles WHERE user_id =?', [$id]);
                 )
             );
         }
+
         return $createUserPortfolioRequest;
     }
+
+
 }

@@ -55,9 +55,14 @@
     </ul>
 </div>
 <body>
+
+
 <form class="max-w-sm mx-auto mt-10 center mx-auto" method="get">
+
     <input class="form-input rounded-lg shadow-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+
            type="text" name="symbols" value="" placeholder="Search">
+
     <button class="bg-blue-500 hover:bg-blue-700 rounded-lg shadow-lg py-2 px-3 text-white font-bold mt-3 focus:outline-none focus:shadow-outline"
             type="submit">Search
     </button>
@@ -68,13 +73,10 @@
 
 
 
-
-
-
     <div>
         <div class="container  m-14 mx-auto px-4">
 
-            <h href="/?symbols={{ respond.getSymbol }}" methods="get" method="post={{ respond.getSymbol }}"
+            <h href="/crypto{{ respond.getSymbol }}" methods="get" method="post"
                class="block rounded bg-gray-200 hover:bg-gray-300 px-3 py-2 mb-4 text-gray-700 font-semi-bold">
                 <h2 class="text-xl font-bold">{{ respond.getSymbol }}</h2>
                 <p>{{ respond.getName }}</p>
@@ -101,20 +103,25 @@
                 {% endif %}
             </h>
 
-                <form action="/readyToBuy" method="post">
+                <form action="/crypto{{ respond.getSymbol }}"  method="post">
+                    <input type="hidden" name="symbol" value="{{ response[0].getSymbol }}">
+                    <input type="hidden" name="price" value="{{ response[0].getPrice }}"></p>
                     <label>
-                        <input type="number" name="buy" placeholder="Enter amount">
+                        <input type="text" name="buyAmount"  placeholder="Enter amount">
+
                     </label>
                     <button class="px-4 py-2 rounded bg-green-500 text-white font-bold mr-4" type="submit" >
                         Buy
                     </button>
                     <label>
-                        <input type="number" name="sell" placeholder="Enter amount">
+                        <input type="number" name="sellAmount" placeholder="Enter amount">
+
                     </label>
                     <button class="px-4 py-2 rounded bg-red-500 text-white font-bold" type="submit" >
                         Sell
                     </button>
                 </form>
+
 
         </div>
     </div>
@@ -122,8 +129,8 @@
 {% endfor %}
 
 
-<button class="px-4 py-2 rounded bg-indigo-500 text-white font-bold">
-    Buy/Sell
+<p class="text-center font-bold">{{ session.message }}</p>
+
 </button>
 </body>
 

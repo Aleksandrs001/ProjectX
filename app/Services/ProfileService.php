@@ -4,18 +4,16 @@ namespace App\Services;
 
 use App\Redirect;
 use App\Repositories\DatabaseRepository;
-use App\Session;
-use App\Template;
 use Carbon\Carbon;
 
 
 class ProfileService
 {
-    public function moneyTransfer()
+    public function moneyTransfer(): Redirect
     {
         $date=( Carbon::now());
 
-     $putIntoDB =$_POST["toMoneyBag"];
+     $putIntoDB =+$_POST["toMoneyBag"];
      if($putIntoDB <=0) {
 
          $_SESSION["message"]= "You can't put negative amount of money into your wallet";
@@ -26,7 +24,7 @@ class ProfileService
                                       money_bag = ?,
                                       user_id = ?,
                                       buy_date= ?',
-             [$putIntoDB, $_SESSION["id"], $date]
+             ["+".$putIntoDB, $_SESSION["id"], $date]
          );
             $_SESSION["message"]= "You have successfully put money into your wallet";
 

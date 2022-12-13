@@ -6,45 +6,101 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Profile</title>
-    <link rel="stylesheet" href="../../public/style/css.css">
+{#    <link rel="stylesheet" href="../../public/style/css.css">#}
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 
-<div class="profileDate">
-    <h2> This is your profile, welcome {{ session.name }},<br> you successfully log in!</h2>
-    <img src="../../{{ session.avatar }}" alt="no avatar uploaded" height="100">
-    <div><h1>
+
+<div class="containers mx-auto px-7 relative" id="1">
+    <ul class="absolute right-10 top-0 shadow-md">
+        {% if session.name %}
+            <p class="font-bold">Welcome {{ session.name }}</p> <br>
+        {% endif %}
+
+        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+            <a href="/" class="hover:bg-gray-700">Home</a>
+        </li>
+
+
+        {% if not session.name %}
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                <a href="/login" class="hover:bg-gray-700">Log In</a>
+            </li>
+        {% endif %}
+
+        {% if not session.name %}
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                <a href="/registration" class="hover:bg-gray-700">Register</a>
+            </li>
+        {% endif %}
+
+
+        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+            <a href="/logout" class="hover:bg-gray-700">Log Out</a>
+        </li>
+    </ul>
+</div>
+
+<div class="flex items-center justify-center">
+    <img src="../../{{ session.avatar }}" alt="no avatar uploaded" class="h-20 rounded-full mr-4">
+    <div>
+        <h1 class="text-xl font-bold">
             Account id: {{ session.id }} <br> Name: {{ session.name }} <br> Login: {{ session.login }}<br>
-            Email: {{ session.email }}</h1>
-        <div>
-            <a href="/logout" methods="get" id="1" class="logout">Logout</a><br>
-            <a href="/">Home</a>
-        </div>
-        <form action="/profile"  method="post">
-            <label>
-                <input type="number" name="toMoneyBag" placeholder="Enter amount">$
-            </label>
-            <button class="px-4 py-2 rounded bg-grey-500 text-white font-bold mr-4" type="submit">
-                Send to wallet
-            </button>
+            Email: {{ session.email }}
+        </h1>
     </div>
+</div>
+
+        <div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center">
+            <h2 class="text-xl font-bold mb-4">Send Money to Wallet</h2>
+            <form action="/profile" method="post">
+                <label class="mb-4">
+                    <input type="text" name="toMoneyBag" placeholder="Enter amount" class="px-4 py-2 rounded-md bg-grey-200">
+                    <span class="font-bold">$ Total money in wallet: {{ items }}$. </span>
+                </label>
+                <button class="px-4 py-2 rounded-md bg-grey-500 text-white font-bold" type="submit">
+                    Send to wallet
+                </button>
+            </form>
+        </div>
+    </div>
+<br><br>
+
+<div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center">
+    <h2 class="text-xl font-bold mb-4">Transaction History</h2>
+    <table class="table-auto w-full">
+        <thead>
+        <tr>
+            <th class="px-4 py-2">Coin Symbol</th>
+            <th class="px-4 py-2">Coin Amount</th>
+            <th class="px-4 py-2">Coin Price</th>
+            <th class="px-4 py-2">Buy Date</th>
+            <th class="px-4 py-2">Sell Date</th>
+            <th class="px-4 py-2">Money in Wallet</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in userData %}
+        <tr>
+
+                <td class="border px-4 py-2">{{ user.getCoinSymbol }}</td>
+                <td class="border px-4 py-2">{{ user.getCoinAmount }}</td>
+                <td class="border px-4 py-2">{{ user.getCoinPrice }}</td>
+                <td class="border px-4 py-2">{{ user.getBuyDate }}</td>
+                <td class="border px-4 py-2">{{ user.getSellDate }}</td>
+                <td class="border px-4 py-2">{{ user.getmoneybag }}</td>
 
 
-    {% for user in userData %}
-        <p>
-            <b>[1] Symbol:</b> {{ user.getCoinSymbol }} |
-            <b>[2] Coin amount:</b> {{ user.getCoinAmount }} |
-            <b>[3] Coin price:</b> {{ user.getCoinPrice }}$ |
-            <b>[4] Buy date:</b> {{ user.buyDate }} |
-            <b>[5] Sell date:</b> {{ user.sellDate }} |
-            <b>[6] Money in wallet:</b> {{ user.moneyBag }}$
-        </p>
+
     {% endfor %}
+
 
 
 
     {{ session.message }}
 </div>
+
 {# <div class="email"> #}
 {#    <form action="/changeEmail" method="post"> #}
 {#        <div><label>Current Email</label> #}

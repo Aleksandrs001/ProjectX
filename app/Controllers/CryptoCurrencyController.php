@@ -20,4 +20,15 @@ class CryptoCurrencyController
             'response' => $cryptoCurrencies->all()
         ]);
     }
+    public function showForm(array $vars): Template
+    {
+        $service = new ListCryptoCurrenciesService();
+        $cryptoCurrencies = $service->execute(
+            explode(",", $vars["symbol"]
+            )
+        );
+        return new Template("readyToBuy/readyToBuy.twig", [
+            'response' => $cryptoCurrencies->all()
+        ]);
+    }
 }
