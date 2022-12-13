@@ -31,7 +31,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $route->addRoute("GET", "/profile", [ProfileController::class, "showForm"]);
     $route->addRoute("GET", "/logout", [logout::class, "logout"]);
     $route->addRoute("POST", "/profile", [ProfileService::class, "moneyTransfer"]);
-    $route->addRoute("GET", "/readyToBuy", [ReadyToBuyController::class, "showForm"]);
+//    $route->addRoute("GET", "/readyToBuy", [ReadyToBuyController::class, "showForm"]);
     $route->addRoute("POST", "/crypto{symbol}", [ReadyToBuyController::class, "buySell"]);
 //    $route->addRoute("POST", "/changeEmail", [ChangeEmailController::class,"showForm"]);
 //    $route->addRoute("POST", "/changePassword", [ChangePasswordController::class,"changePassword"]);

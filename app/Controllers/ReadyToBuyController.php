@@ -11,19 +11,7 @@ use App\Template;
 
 class ReadyToBuyController
 {
-    public CryptoCurrenciesCollection $cryptoCurrencies;
 
-    public function showForm(): Template
-    {
-        $service = new ListCryptoCurrenciesService();
-        $this->cryptoCurrencies = $cryptoCurrencies = $service->execute(
-            explode(",", $symbol ?? "DOGE"
-            )
-        );
-        return new Template("readyToBuy/readyToBuy.twig", [
-            'response' => $cryptoCurrencies->all()
-        ]);
-    }
 
     public function buySell()
     {
@@ -53,7 +41,7 @@ class ReadyToBuyController
             } else {
                 Session::put("message", "You don't have enough money to buy this amount of coins. Total in wallet: $totalMoney$");
             }
-            return new Redirect("/readyToBuy");
+            return new Redirect("/crypto{$symbol}");
         }
 
         $resultSet = DatabaseRepository::getConnection()->executeQuery(
@@ -74,9 +62,9 @@ class ReadyToBuyController
             } else {
                 Session::put("message", "You don't have enough coins to sell this amount. Total in wallet: $items coins of $symbol.");
             }
-            return new Redirect("/readyToBuy");
+            return new Redirect("/crypto{$symbol}");
         }
-        return new Redirect("/readyToBuy");
+        return new Redirect("/crypto{$symbol}");
     }
 
 }

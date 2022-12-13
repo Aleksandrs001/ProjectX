@@ -82,31 +82,27 @@
         <tr>
             <th class="px-4 py-2">Coin Symbol</th>
             <th class="px-4 py-2">Coin Amount</th>
+            <th class="px-4 py-2">Money in Wallet</th>
             <th class="px-4 py-2">Coin Price</th>
             <th class="px-4 py-2">Buy Date</th>
             <th class="px-4 py-2">Sell Date</th>
-            <th class="px-4 py-2">Money in Wallet</th>
         </tr>
         </thead>
         <tbody>
         {% for user in userData %}
-        <tr>
-
+            <tr>
                 <td class="border px-4 py-2">{{ user.getCoinSymbol }}</td>
-                <td class="border px-4 py-2">{{ user.getCoinAmount }}</td>
-                <td class="border px-4 py-2">{{ user.getCoinPrice }}</td>
+                <td class="border px-4 py-2 {% if user.getCoinAmount < 0 %}text-red-700{% else %}text-green-700{% endif %}">{{ user.getCoinAmount }}</td>
+                <td class="border px-4 py-2 {% if user.getMoneyBag < 0 %}text-red-700{% else %}text-green-700{% endif %}">{{ user.getmoneybag }}</td>
+                <td class="border px-4 py-2 ">{{ user.getCoinPrice }}</td>
                 <td class="border px-4 py-2">{{ user.getBuyDate }}</td>
                 <td class="border px-4 py-2">{{ user.getSellDate }}</td>
-                <td class="border px-4 py-2">{{ user.getmoneybag }}</td>
+
+            </tr>
+        {% endfor %}
 
 
-
-    {% endfor %}
-
-
-
-
-    {{ session.message }}
+        {{ session.message }}
 
 </body>
 </html>
