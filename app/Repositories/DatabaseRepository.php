@@ -25,4 +25,3 @@ class DatabaseRepository
         return self::$connection;
     }
 }
-

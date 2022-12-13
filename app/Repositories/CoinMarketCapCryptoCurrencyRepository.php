@@ -11,7 +11,6 @@ class CoinMarketCapCryptoCurrencyRepository implements CryptoCurrenciesRepositor
 
     private const API_URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/';
     private Client $httpClient;
-    public $cryptoCurrencies;
 
     public function __construct()
     {
@@ -48,7 +47,4 @@ class CoinMarketCapCryptoCurrencyRepository implements CryptoCurrenciesRepositor
         }
         return $cryptoCurrencies;
     }
-
-
-
 }

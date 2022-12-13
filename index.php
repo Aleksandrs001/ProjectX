@@ -8,6 +8,7 @@ use App\Controllers\ProfileController;
 use App\Controllers\ReadyToBuyController;
 use App\Controllers\RegistrationController;
 use App\logout;
+use App\Redirect;
 use App\Services\LoginService;
 use App\Services\ProfileService;
 use App\Session;
@@ -30,8 +31,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $route->addRoute("GET", "/login", [LoginController::class, "showForm"]);
     $route->addRoute("POST", "/login", [LoginService::class, "getIn"]);
     $route->addRoute("GET", "/profile", [ProfileController::class, "showForm"]);
-    $route->addRoute("GET", "/logout", [logout::class, "logout"]);
     $route->addRoute("POST", "/profile", [ProfileService::class, "moneyTransfer"]);
+    $route->addRoute("GET", "/logout", [logout::class, "logout"]);
 //    $route->addRoute("POST", "/changeEmail", [ChangeEmailController::class,"showForm"]);
 //    $route->addRoute("POST", "/changePassword", [ChangePasswordController::class,"changePassword"]);
 });
@@ -40,11 +41,10 @@ $loader = new FilesystemLoader('views');
 $twig = new Environment($loader);
 $twig->addGlobal("session", $_SESSION);
 
-// Fetch method and URI from somewhere
+
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
 
-// Strip query string (?foo=bar) and decode URI
 if (false !== $pos = strpos($uri, '?')) {
     $uri = substr($uri, 0, $pos);
 }
@@ -62,7 +62,6 @@ switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
         $vars = $routeInfo[2];
-        // ... call $handler with $vars
         [$controller, $method] = $handler;
 
         $response = (new $controller)->{$method}($vars);
@@ -73,11 +72,10 @@ switch ($routeInfo[0]) {
          unset($_SESSION['message']);
             break;
         }
-        if ($response instanceof \App\Redirect) {
+        if ($response instanceof Redirect) {
             header("location:" . $response->getUrl());
 //            unset($_SESSION["message"]);
 
             break;
         }
 }
-

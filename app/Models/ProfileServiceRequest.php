@@ -59,5 +59,4 @@ class ProfileServiceRequest extends CryptoCurrenciesCollection
     {
         return $this->sellDate;
     }
-
 }

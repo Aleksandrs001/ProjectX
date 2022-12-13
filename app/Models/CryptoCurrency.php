@@ -52,5 +52,4 @@ class CryptoCurrency extends CryptoCurrenciesCollection
     {
         return $this->percentChange24h;
     }
-
 }

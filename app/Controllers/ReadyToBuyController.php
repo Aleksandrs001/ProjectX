@@ -1,17 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Models\Collections\CryptoCurrenciesCollection;
 use App\Redirect;
 use App\Repositories\DatabaseRepository;
-use App\Services\CryptoCurrency\ListCryptoCurrenciesService;
 use App\Session;
-use App\Template;
 
 class ReadyToBuyController
 {
-
 
     public function buySell()
     {
@@ -66,5 +62,4 @@ class ReadyToBuyController
         }
         return new Redirect("/crypto{$symbol}");
     }
-
 }

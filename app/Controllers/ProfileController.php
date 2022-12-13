@@ -11,9 +11,6 @@ use App\Template;
 class ProfileController
 {
 
-
-
-
     public function getTotalInMoneyBag(): int
     {
 
@@ -62,9 +59,6 @@ FROM users_crypto_profiles WHERE user_id =?', [$id]);
                 )
             );
         }
-
         return $createUserPortfolioRequest;
     }
-
-
 }
