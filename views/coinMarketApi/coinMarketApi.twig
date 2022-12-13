@@ -59,22 +59,7 @@
     </button>
 </form>
 
-
-<form>
-    <label for="/symbols">Choose Coin:</label>
-    <select id="/symbols" name="/symbols">
-        {% for respond in response %}
-        <option value={{ respond.getSymbol }}>{{ respond.getSymbol }}</option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Submit">
-</form>
-
-
-
-
 {% for respond in response %}
-
 
     <div>
         <div class="container  m-14 mx-auto px-4">
@@ -83,7 +68,6 @@
                class="block rounded bg-gray-200 hover:bg-gray-300 px-3 py-2 mb-4 text-gray-700 font-semi-bold">
                 <h2 class="text-xl font-bold">{{ respond.getSymbol }}</h2>
                 <p>{{ respond.getName }}</p>
-
 
                 <p class="text-xl font-bold">{{ respond.getPrice|number_format(3) }} $</p>
 

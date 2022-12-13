@@ -6,7 +6,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Profile</title>
-{#    <link rel="stylesheet" href="../../public/style/css.css">#}
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
@@ -42,29 +41,38 @@
     </ul>
 </div>
 
+
 <div class="flex items-center justify-center">
-    <img src="../../{{ session.avatar }}" alt="no avatar uploaded" class="h-20 rounded-full mr-4">
+    <img src="../../{{ session.avatar }}" alt="no avatar uploaded" class="h-20 rounded-full mr-4 p-2 border-2 border-black" >
     <div>
         <h1 class="text-xl font-bold">
-            Account id: {{ session.id }} <br> Name: {{ session.name }} <br> Login: {{ session.login }}<br>
+            Account id: {{ session.id }} <br> Name: {{ session.name }} <br> Login: {{ session.login }} <br>
             Email: {{ session.email }}
         </h1>
     </div>
 </div>
 
-        <div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center">
-            <h2 class="text-xl font-bold mb-4">Send Money to Wallet</h2>
-            <form action="/profile" method="post">
-                <label class="mb-4">
-                    <input type="text" name="toMoneyBag" placeholder="Enter amount" class="px-4 py-2 rounded-md bg-grey-200">
-                    <span class="font-bold">$ Total money in wallet: {{ items }}$. </span>
-                </label>
-                <button class="px-4 py-2 rounded-md bg-grey-500 text-white font-bold" type="submit">
-                    Send to wallet
-                </button>
-            </form>
-        </div>
-    </div>
+
+<div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center">
+    <h2 class="text-xl font-bold mb-4">Send Money to Wallet</h2>
+    <form action="/profile" method="post">
+        <label class="mb-4">
+            <input type="text" name="toMoneyBag" placeholder="Enter amount $" class="px-4 py-2 rounded-md bg-grey-200">
+        </label>
+        <button type="submit" class="px-4 py-2 rounded-md bg-grey-500 text-black font-bold">
+            <button type="submit" >Send to Wallet</button>
+
+        </button><br>
+        <span class="font-bold"> Total money in wallet: {{ items }}$. </span>
+    </form>
+
+
+
+</div>
+
+
+
+
 <br><br>
 
 <div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center">
@@ -99,41 +107,10 @@
 
 
     {{ session.message }}
-</div>
 
-{# <div class="email"> #}
-{#    <form action="/changeEmail" method="post"> #}
-{#        <div><label>Current Email</label> #}
-{#            <label> #}
-{#                <input type="email" name="oldEmail" placeholder="Enter Current email"> #}
-{#            </label></div> #}
-{#        <div><label>New Email</label> #}
-{#            <label> #}
-{#                <input type="email" name="newEmail" placeholder="Enter New email"> #}
-{#            </label></div> #}
-{#        <div><label>Repeat New Email</label> #}
-{#            <label> #}
-{#                <input type="email" name="reEmail" placeholder="Enter Repeat New email"> #}
-{#            </label></div> #}
-{#       <button type="submit">Change</button> #}
-{#    </form> #}
-{# </div> #}
-{# <div class="password"> #}
-{#    <form action="/changePassword" method="post"> #}
-{#        <div><label>CurrentPassword</label> #}
-{#            <label> #}
-{#                <input type="password" name="oldPassword" placeholder="Enter Current password"> #}
-{#            </label></div> #}
-{#        <div><label>New Password</label> #}
-{#            <label> #}
-{#                <input type="password" name="newPassword" placeholder="Enter New password"> #}
-{#            </label></div> #}
-{#        <div><label>Repeat New password</label> #}
-{#            <label> #}
-{#                <input type="password" name="reNewPassword" placeholder="Repeat New password"> #}
-{#            </label></div> #}
-{#      <button type="submit">Change</button> #}
-{#    </form> #}
-{# </div> #}
 </body>
 </html>
+
+
+
+

@@ -54,14 +54,16 @@
         </li>
     </ul>
 </div>
-<body>
+
 
 
 <form class="max-w-sm mx-auto mt-10 center mx-auto" method="get">
 
-    <input class="form-input rounded-lg shadow-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    <label>
+        <input class="form-input rounded-lg shadow-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 
-           type="text" name="symbols" value="" placeholder="Search">
+               type="text" name="symbols" value="" placeholder="Search">
+    </label>
 
     <button class="bg-blue-500 hover:bg-blue-700 rounded-lg shadow-lg py-2 px-3 text-white font-bold mt-3 focus:outline-none focus:shadow-outline"
             type="submit">Search
@@ -70,13 +72,9 @@
 
 
 {% for respond in response %}
-
-
-
     <div>
         <div class="container  m-14 mx-auto px-4">
-
-            <h href="/crypto{{ respond.getSymbol }}" methods="get" method="post"
+            <h href="/crypto{{ respond.getSymbol }}" methods="get"
                class="block rounded bg-gray-200 hover:bg-gray-300 px-3 py-2 mb-4 text-gray-700 font-semi-bold">
                 <h2 class="text-xl font-bold">{{ respond.getSymbol }}</h2>
                 <p>{{ respond.getName }}</p>
@@ -105,7 +103,7 @@
 
                 <form action="/crypto{{ respond.getSymbol }}"  method="post">
                     <input type="hidden" name="symbol" value="{{ response[0].getSymbol }}">
-                    <input type="hidden" name="price" value="{{ response[0].getPrice }}"></p>
+                    <input type="hidden" name="price" value="{{ response[0].getPrice }}">
                     <label>
                         <input type="text" name="buyAmount"  placeholder="Enter amount">
 
@@ -121,8 +119,6 @@
                         Sell
                     </button>
                 </form>
-
-
         </div>
     </div>
 
@@ -131,7 +127,7 @@
 
 <p class="text-center font-bold">{{ session.message }}</p>
 
-</button>
+
 </body>
 
 </html>
