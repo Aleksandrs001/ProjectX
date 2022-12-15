@@ -2,9 +2,8 @@
 
 namespace App\Controllers;
 
-
-use App\Services\HistoryService;
 use App\Template;
+use App\Services\HistoryService;
 
 class HistoryController
 {
@@ -12,7 +11,6 @@ class HistoryController
     {
         $allTransactions = new HistoryService();
         $history=$allTransactions->showHistory();
-
 
         return new Template("history/history.twig",
             [

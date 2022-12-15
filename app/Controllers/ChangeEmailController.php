@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Redirect;
-use App\Repositories\DatabaseRepository;
 use App\Session;
 use App\Template;
+use App\Redirect;
+use App\Repositories\DatabaseRepository;
 
 class ChangeEmailController
 {

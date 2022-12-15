@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Models\ChangePasswordServiceRequest;
 use App\Redirect;
 use App\Services\ChangePasswordService;
+use App\Models\ChangePasswordServiceRequest;
 
 class ChangePasswordController
 {

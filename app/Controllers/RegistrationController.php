@@ -2,11 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Models\RegisterServiceRequest;
-
-use App\Redirect;
-use App\Services\RegisterService;
 use App\Template;
+use App\Redirect;
+use App\Services\RegistrationService;
+use App\Models\RegisterServiceRequest;
 
 class RegistrationController
 {
@@ -19,7 +18,7 @@ class RegistrationController
     public function store(): Redirect
     {
 
-        $registerService = new RegisterService();
+        $registerService = new RegistrationService();
         $registerService->execute(
             new RegisterServiceRequest(
                 $_POST['name'],
@@ -32,4 +31,3 @@ class RegistrationController
         return new Redirect("/registration");
     }
 }
-

@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Services\CryptoCurrency\ListCryptoCurrenciesService;
 use App\Template;
+use App\Services\CryptoCurrency\ListCryptoCurrenciesService;
 
 class CryptoCurrencyController
 {

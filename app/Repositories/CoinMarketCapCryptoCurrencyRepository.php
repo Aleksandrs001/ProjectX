@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Models\Collections\CryptoCurrenciesCollection;
-use App\Models\CryptoCurrency;
 use GuzzleHttp\Client;
+use App\Models\CryptoCurrency;
+use App\Models\Collections\CryptoCurrenciesCollection;
 
 class CoinMarketCapCryptoCurrencyRepository implements CryptoCurrenciesRepository
 {
@@ -14,7 +14,6 @@ class CoinMarketCapCryptoCurrencyRepository implements CryptoCurrenciesRepositor
 
     public function __construct()
     {
-
         $this->httpClient = new Client(["base_uri" => self::API_URL]);
     }
 

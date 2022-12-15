@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Redirect;
 use App\Session;
+use App\Redirect;
 
 class SellCryptoCurrencyRepository
 {

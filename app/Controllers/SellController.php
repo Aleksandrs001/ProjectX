@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Models\BuySellServiceRequest;
 use App\Post;
 use App\Redirect;
 use App\Services\SellService;
+use App\Models\BuySellServiceRequest;
 
 class SellController
 {

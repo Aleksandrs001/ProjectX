@@ -5,9 +5,73 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>CoinTransfer</title>
 </head>
 <body>
-Hello from CoinTransfer
+<!-- HTML -->
+
+
+<form action="/coinTransfer" method="post">
+    <!-- HTML Form -->
+
+        <div class="max-w-sm rounded overflow-hidden shadow-lg m-auto mt-10">
+            <div class="px-6 py-4">
+                <div class="font-bold text-xl mb-2">Login</div>
+
+                <!-- Login Input -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="login">
+                        Enter your login
+                    </label>
+                    <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            name="login"
+                            type="text"
+                            placeholder="Enter your login"
+                    />
+                </div>
+
+                <!-- Email Input -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                        Enter your email
+                    </label>
+                    <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            name="email"
+                            type="email"
+                            placeholder="Enter your email"
+                    />
+                </div>
+
+                <!-- Password Input -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                        Enter your password
+                    </label>
+                    <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            name="password"
+                            type="password"
+                            placeholder="Enter your password"
+                    />
+                </div>
+
+                <!-- Login Button -->
+                <div class="flex items-center justify-between">
+                    <button
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit"
+                    >
+                        Login
+                    </button>
+                </div>
+                <p class="text-4xl font-medium text-red-500">Hello Виктория</p>
+            </div>
+        </div>
+    </form>
+
+
 </body>
 </html>

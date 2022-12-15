@@ -3,10 +3,9 @@
 namespace App\Controllers;
 
 use App\Post;
-use App\Redirect;
-use App\Repositories\ProfileRepository;
-use App\Services\ProfileService;
 use App\Template;
+use App\Redirect;
+use App\Services\ProfileService;
 
 class ProfileController
 {

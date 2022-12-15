@@ -2,9 +2,9 @@
 
 namespace App\Services\CryptoCurrency;
 
+use App\Repositories\CryptoCurrenciesRepository;
 use App\Models\Collections\CryptoCurrenciesCollection;
 use App\Repositories\CoinMarketCapCryptoCurrencyRepository;
-use App\Repositories\CryptoCurrenciesRepository;
 
 class ListCryptoCurrenciesService
 {

@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
+use App\Session;
 use App\Redirect;
 use App\Repositories\DatabaseRepository;
-use App\Session;
 
 class ChangePasswordService
 {

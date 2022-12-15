@@ -8,12 +8,14 @@ class LoginServiceRequest
     public string $name;
     public string $login;
     public string $email;
+    public string $password;
     public string $avatar;
 
     public function __construct(string $id,
                                 string $name,
                                 string $login,
                                 string $email,
+                                string $password,
                                 string $avatar)
     {
         $this->id = $id;
@@ -21,6 +23,7 @@ class LoginServiceRequest
         $this->login = $login;
         $this->email = $email;
         $this->avatar = $avatar;
+        $this->password = $password;
     }
 
     public function getAvatar(): string
@@ -46,5 +49,10 @@ class LoginServiceRequest
     public function getId(): string
     {
         return $this->id;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
     }
 }

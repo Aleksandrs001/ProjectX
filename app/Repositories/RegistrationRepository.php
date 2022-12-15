@@ -1,16 +1,13 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace App\Services;
+namespace App\Repositories;
 
-use App\Models\RegisterServiceRequest;
-use App\Redirect;
-use App\Repositories\DatabaseRepository;
 use App\Session;
+use App\Redirect;
 
-class RegisterService
+class RegistrationRepository
 {
-
-    public function execute(RegisterServiceRequest $request): Redirect
+    public function registrationCheck($request): Redirect
     {
         $userEmail = $request->getEmail();
         $emailFrom_DB = DatabaseRepository::getConnection()->executeQuery("SELECT email FROM users WHERE email = '$userEmail' ")->rowCount();
