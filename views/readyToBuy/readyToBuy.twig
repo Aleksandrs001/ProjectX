@@ -56,7 +56,6 @@
 </div>
 
 
-
 <form class="max-w-sm mx-auto mt-10 center mx-auto" method="get">
 
     <label>
@@ -100,25 +99,33 @@
                     <p>{{ respond.getPercentChange7d|number_format(3) }}%</p>
                 {% endif %}
             </h>
+<div>
+            <form action="/buy/crypto{{ respond.getSymbol }}" method="post">
+                <input type="hidden" name="symbol" value="{{ response[0].getSymbol }}">
+                <input type="hidden" name="price" value="{{ response[0].getPrice }}">
+                <label>
+                    <input type="text" name="buyAmount" placeholder="Enter amount">
 
-                <form action="/crypto{{ respond.getSymbol }}"  method="post">
+                </label>
+                <button class="px-4 py-2 rounded bg-green-500 text-white font-bold mr-4" type="submit">
+                    Buy
+                </button>
+                </form>
+    </div>
+<div>
+                <form action="/sell/crypto{{ respond.getSymbol }}" method="post">
                     <input type="hidden" name="symbol" value="{{ response[0].getSymbol }}">
                     <input type="hidden" name="price" value="{{ response[0].getPrice }}">
-                    <label>
-                        <input type="text" name="buyAmount"  placeholder="Enter amount">
-
-                    </label>
-                    <button class="px-4 py-2 rounded bg-green-500 text-white font-bold mr-4" type="submit" >
-                        Buy
-                    </button>
                     <label>
                         <input type="number" name="sellAmount" placeholder="Enter amount">
 
                     </label>
-                    <button class="px-4 py-2 rounded bg-red-500 text-white font-bold" type="submit" >
+                    <button class="px-4 py-2 rounded bg-red-500 text-white font-bold" type="submit">
                         Sell
                     </button>
                 </form>
+
+</div>
         </div>
     </div>
 

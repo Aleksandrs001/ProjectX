@@ -21,4 +21,9 @@ class  Session
     {
         return isset(self::$data[$key]);
     }
+
+    public static function getData($key): string
+    {
+        return self::$data["$key"];
+    }
 }

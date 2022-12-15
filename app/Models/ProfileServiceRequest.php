@@ -9,35 +9,22 @@ class ProfileServiceRequest extends CryptoCurrenciesCollection
     private ?string $coinSymbol;
     private ?string $coinAmount;
     private ?string $coinPrice;
-    private ?string $buyDate;
-    private ?string $sellDate;
+    private ?string $date;
     private ?string $moneyBag;
 
     public function __construct(
                                 ?string $coinSymbol=null,
                                 ?string $coinAmount=null,
                                 ?string $coinPrice=null,
-                                ?string $buyDate=null,
-                                ?string $sellDate=null,
+                                ?string $date=null,
                                 ?string $moneyBag=null
     )
     {
         $this->coinSymbol = $coinSymbol;
-        $this->coinPrice = $coinPrice;
-        $this->buyDate = $buyDate;
-        $this->sellDate = $sellDate;
-        $this->moneyBag = $moneyBag;
         $this->coinAmount = $coinAmount;
-    }
-
-    public function getBuyDate(): ?string
-    {
-        return $this->buyDate;
-    }
-
-    public function getCoinPrice(): ?string
-    {
-        return $this->coinPrice;
+        $this->coinPrice = $coinPrice;
+        $this->date = $date;
+        $this->moneyBag = $moneyBag;
     }
 
     public function getCoinSymbol(): ?string
@@ -45,18 +32,23 @@ class ProfileServiceRequest extends CryptoCurrenciesCollection
         return $this->coinSymbol;
     }
 
+    public function getCoinPrice(): ?string
+    {
+        return $this->coinPrice;
+    }
+
     public function getCoinAmount(): ?string
     {
         return $this->coinAmount;
     }
 
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
     public function getMoneyBag(): ?string
     {
         return $this->moneyBag;
-    }
-
-    public function getSellDate(): ?string
-    {
-        return $this->sellDate;
     }
 }

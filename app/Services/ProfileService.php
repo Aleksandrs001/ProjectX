@@ -7,7 +7,6 @@ use App\Repositories\DatabaseRepository;
 use App\Session;
 use Carbon\Carbon;
 
-
 class ProfileService
 {
     public function moneyTransfer(): Redirect
@@ -24,7 +23,7 @@ class ProfileService
              'INSERT INTO users_crypto_profiles SET
                                       money_bag = ?,
                                       user_id = ?,
-                                      buy_date= ?',
+                                      date = ?',
              ["+".$putIntoDB, $_SESSION["id"], $date]
          );
          Session::put("message", "You have successfully put money into your wallet");

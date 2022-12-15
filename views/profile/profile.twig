@@ -84,8 +84,7 @@
             <th class="px-4 py-2">Coin Amount</th>
             <th class="px-4 py-2">Money in Wallet</th>
             <th class="px-4 py-2">Coin Price</th>
-            <th class="px-4 py-2">Buy Date</th>
-            <th class="px-4 py-2">Sell Date</th>
+            <th class="px-4 py-2">Date</th>
         </tr>
         </thead>
         <tbody>
@@ -95,9 +94,7 @@
                 <td class="border px-4 py-2 {% if user.getCoinAmount < 0 %}text-red-700{% else %}text-green-700{% endif %}">{{ user.getCoinAmount }}</td>
                 <td class="border px-4 py-2 {% if user.getMoneyBag < 0 %}text-red-700{% else %}text-green-700{% endif %}">{{ user.getmoneybag }}</td>
                 <td class="border px-4 py-2 ">{{ user.getCoinPrice }}</td>
-                <td class="border px-4 py-2">{{ user.getBuyDate }}</td>
-                <td class="border px-4 py-2">{{ user.getSellDate }}</td>
-
+                <td class="border px-4 py-2">{{ user.getDate }}</td>
             </tr>
         {% endfor %}
 

@@ -6,7 +6,6 @@ class Logout
 {
     public function logout(): Redirect
     {
-
         unset($_SESSION["error"]);
         unset($_SESSION["message"]);
         unset($_SESSION["id"]);
