@@ -4,11 +4,11 @@ namespace App\Models;
 
 class LoginServiceRequest
 {
-    private string $id;
-    private string $name;
-    private string $login;
-    private string $email;
-    private string $avatar;
+    public string $id;
+    public string $name;
+    public string $login;
+    public string $email;
+    public string $avatar;
 
     public function __construct(string $id,
                                 string $name,

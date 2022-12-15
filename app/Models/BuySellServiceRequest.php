@@ -1,23 +1,21 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models;
 
 class BuySellServiceRequest
 {
-    public string $amount;
+    public float $amount;
     public string $symbol;
-    public string $price;
 
-    public function __construct(string $amount,
-                                string $symbol,
-                                string $price)
+    public function __construct(float $amount,
+                                string $symbol
+    )
     {
         $this->amount = $amount;
         $this->symbol = $symbol;
-        $this->price = $price;
     }
 
-    public function getAmount(): string
+    public function getAmount(): float
     {
         return $this->amount;
     }
@@ -25,10 +23,5 @@ class BuySellServiceRequest
     public function getSymbol(): string
     {
         return $this->symbol;
-    }
-
-    public function getPrice(): string
-    {
-        return $this->price;
     }
 }

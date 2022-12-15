@@ -4,11 +4,11 @@ namespace App\Models;
 
 class RegisterServiceRequest
 {
-    private string $name;
-    private string $email;
-    private string $password;
-    private string $login;
-    private array $avatar;
+    public string $name;
+    public string $email;
+    public string $password;
+    public string $login;
+    public array $avatar;
 
     public function __construct(string $name,
                                 string $login,

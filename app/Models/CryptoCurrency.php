@@ -6,12 +6,12 @@ use App\Models\Collections\CryptoCurrenciesCollection;
 
 class CryptoCurrency extends CryptoCurrenciesCollection
 {
-    private string $symbol;
-    private string $name;
-    private float $price;
-    private float $percentChange1h;
-    private float $percentChange24h;
-    private float $percentChange7d;
+    public string $symbol;
+    public string $name;
+    public float $price;
+    public float $percentChange1h;
+    public float $percentChange24h;
+    public float $percentChange7d;
 
     public function __construct(string $symbol, string $name, float $price, float $percentChange1h, float $percentChange24h, float $percentChange7d)
     {

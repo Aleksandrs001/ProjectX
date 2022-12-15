@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Repositories;
 
@@ -7,10 +7,15 @@ use App\Session;
 
 class SellCryptoCurrencyRepository
 {
-    public function sellCryptoCurrency(string $price,string $symbol, string $amount): Redirect
+    public function sellCryptoCurrency(float $price,string $symbol, float $amount): Redirect
     {
         $resultSet = DatabaseRepository::getConnection()->executeQuery(
-            'SELECT  coin_amount FROM users_crypto_profiles WHERE user_id = ? AND coin_symbol = ?', [Session::getData("id"), $symbol]);
+            'SELECT coin_amount FROM users_crypto_profiles WHERE user_id = ? AND coin_symbol = ?',
+            [
+                Session::getData("id"),
+                $symbol
+            ]
+        );
         $user = $resultSet->fetchAllAssociative();
         $coinAmountInDB = 0;
 

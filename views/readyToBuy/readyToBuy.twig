@@ -19,7 +19,7 @@
     <h4 class="welcome">MyCoinMarketCap</h4>
 </div>
 
-
+<div class="absolute top-20 left-0 right-1 ...">
 <div class="containers mx-auto px-7 relative" id="1">
     <ul class="absolute right-10 top-0 shadow-md">
         {% if session.name %}
@@ -99,13 +99,13 @@
                     <p>{{ respond.getPercentChange7d|number_format(3) }}%</p>
                 {% endif %}
             </h>
+            {% if session.name %}
+
 <div>
             <form action="/buy/crypto{{ respond.getSymbol }}" method="post">
-                <input type="hidden" name="symbol" value="{{ response[0].getSymbol }}">
-                <input type="hidden" name="price" value="{{ response[0].getPrice }}">
+
                 <label>
                     <input type="text" name="buyAmount" placeholder="Enter amount">
-
                 </label>
                 <button class="px-4 py-2 rounded bg-green-500 text-white font-bold mr-4" type="submit">
                     Buy
@@ -114,11 +114,8 @@
     </div>
 <div>
                 <form action="/sell/crypto{{ respond.getSymbol }}" method="post">
-                    <input type="hidden" name="symbol" value="{{ response[0].getSymbol }}">
-                    <input type="hidden" name="price" value="{{ response[0].getPrice }}">
                     <label>
-                        <input type="number" name="sellAmount" placeholder="Enter amount">
-
+                        <input type="text" name="sellAmount" placeholder="Enter amount">
                     </label>
                     <button class="px-4 py-2 rounded bg-red-500 text-white font-bold" type="submit">
                         Sell
@@ -128,6 +125,7 @@
 </div>
         </div>
     </div>
+            {% endif %}
 
 {% endfor %}
 

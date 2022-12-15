@@ -13,7 +13,6 @@ class LoginService
     {
         $login = $_POST["login"];
         $password = md5($_POST["password"]);
-
         $resultSet = DatabaseRepository::getConnection()->executeQuery('SELECT * FROM users WHERE login = ?', [$login]);
         $user = $resultSet->fetchAssociative();
         $objDB = new LoginServiceRequest(
@@ -23,6 +22,7 @@ class LoginService
             $user["email"],
             $user["avatar"]
         );
+
         if ($login == $user["login"] && $user["password"] == $password) {
             Session::put("id", $objDB->getId());
             Session::put("name", $objDB->getName());

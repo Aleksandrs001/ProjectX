@@ -6,16 +6,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Profile</title>
+
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 
-
-<div class="containers mx-auto px-7 relative" id="1">
+<div class="absolute top-20 left-0 right-1 ...">
+<div class="containers mx-auto px-7 relative" >
     <ul class="absolute right-10 top-0 shadow-md">
         {% if session.name %}
             <p class="font-bold">Welcome {{ session.name }}</p> <br>
         {% endif %}
+
+        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+            <a href="/history" class="hover:bg-gray-700">History</a>
+        </li>
 
         <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
             <a href="/" class="hover:bg-gray-700">Home</a>
@@ -41,8 +46,8 @@
     </ul>
 </div>
 
-
-<div class="flex items-center justify-center">
+<div class="absolute top-80 left-0 right-0 ...">
+<div class="flex items-center justify-center " >
     <img src="../../{{ session.avatar }}" alt="no avatar uploaded" class="h-20 rounded-full mr-4 p-2 border-2 border-black" >
     <div>
         <h1 class="text-xl font-bold">
@@ -53,7 +58,7 @@
 </div>
 
 
-<div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center">
+<div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center ">
     <h2 class="text-xl font-bold mb-4">Send Money to Wallet</h2>
     <form action="/profile" method="post">
         <label class="mb-4">
@@ -63,44 +68,12 @@
             <button type="submit" >Send to Wallet</button>
 
         </button><br>
-        <span class="font-bold"> Total money in wallet: {{ items }}$. </span>
+        <span class="font-bold"> Total money in wallet: {{ items|number_format(2) }}$. </span>
     </form>
-
-
-
 </div>
-
-
-
-
-<br><br>
-
-<div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center">
-    <h2 class="text-xl font-bold mb-4">Transaction History</h2>
-    <table class="table-auto w-full">
-        <thead>
-        <tr>
-            <th class="px-4 py-2">Coin Symbol</th>
-            <th class="px-4 py-2">Coin Amount</th>
-            <th class="px-4 py-2">Money in Wallet</th>
-            <th class="px-4 py-2">Coin Price</th>
-            <th class="px-4 py-2">Date</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for user in userData %}
-            <tr>
-                <td class="border px-4 py-2">{{ user.getCoinSymbol }}</td>
-                <td class="border px-4 py-2 {% if user.getCoinAmount < 0 %}text-red-700{% else %}text-green-700{% endif %}">{{ user.getCoinAmount }}</td>
-                <td class="border px-4 py-2 {% if user.getMoneyBag < 0 %}text-red-700{% else %}text-green-700{% endif %}">{{ user.getmoneybag }}</td>
-                <td class="border px-4 py-2 ">{{ user.getCoinPrice }}</td>
-                <td class="border px-4 py-2">{{ user.getDate }}</td>
-            </tr>
-        {% endfor %}
-
-
+    <div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center ">
         {{ session.message }}
-
+</div>
 </body>
 </html>
 

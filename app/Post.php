@@ -1,17 +1,17 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App;
 
 class Post
 {
-    public string $post;
+    public float $post;
 
-    public function __construct(string $post)
+    public function __construct( float $post)
     {
         $this->post = $post;
     }
 
-    public function getPost(): string
+    public function getPost(): float
     {
         return $this->post;
     }

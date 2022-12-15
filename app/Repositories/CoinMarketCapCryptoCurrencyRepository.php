@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Repositories;
 
@@ -26,7 +26,7 @@ class CoinMarketCapCryptoCurrencyRepository implements CryptoCurrenciesRepositor
                 "X-CMC_PRO_API_KEY" => $_ENV["SECRET_KEY"]
             ],
             "query" => [
-                "symbol" => implode(",", $symbols),
+                "symbol" => implode(",",$symbols),
                 "convert" => "USD"
             ]
         ]);

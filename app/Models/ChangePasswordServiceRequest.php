@@ -4,10 +4,10 @@ namespace App\Models;
 
 class ChangePasswordServiceRequest
 {
-    private string $currentPassword;
-    private string $newPassword;
-    private string $reNewPassword;
-    private int $id;
+    public string $currentPassword;
+    public string $newPassword;
+    public string $reNewPassword;
+    public int $id;
 
     public function __construct(string $currentPassword,
                                 string $newPassword,

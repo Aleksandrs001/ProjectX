@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controllers;
 
@@ -11,9 +11,8 @@ class SellController
 {
     public function sellCryptoCurrency($userInfo): Redirect
     {
-        $amount = new Post ($_POST["sellAmount"]);
-        $price = $_POST["price"];
-        $sellService = new BuySellServiceRequest($amount->getPost(), $userInfo["symbol"], $price);
+        $amount = new Post ((float) $_POST["sellAmount"]);
+        $sellService = new BuySellServiceRequest($amount->getPost(), $userInfo["symbol"]);
         $startService = new SellService();
 
         return $startService->sellCrypto($sellService);

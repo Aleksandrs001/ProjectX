@@ -6,11 +6,11 @@ use App\Models\Collections\CryptoCurrenciesCollection;
 
 class ProfileServiceRequest extends CryptoCurrenciesCollection
 {
-    private ?string $coinSymbol;
-    private ?string $coinAmount;
-    private ?string $coinPrice;
-    private ?string $date;
-    private ?string $moneyBag;
+    public ?string $coinSymbol;
+    public ?string $coinAmount;
+    public ?string $coinPrice;
+    public ?string $date;
+    public ?string $moneyBag;
 
     public function __construct(
                                 ?string $coinSymbol=null,

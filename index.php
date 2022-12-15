@@ -3,6 +3,7 @@
 require_once 'vendor/autoload.php';
 
 use App\Controllers\CryptoCurrencyController;
+use App\Controllers\HistoryController;
 use App\Controllers\LoginController;
 use App\Controllers\ProfileController;
 use App\Controllers\BuyController;
@@ -34,7 +35,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $route->addRoute("GET", "/login", [LoginController::class, "showForm"]);
     $route->addRoute("POST", "/login", [LoginService::class, "getIn"]);
     $route->addRoute("GET", "/profile", [ProfileController::class, "showForm"]);
-    $route->addRoute("POST", "/profile", [ProfileService::class, "moneyTransfer"]);
+    $route->addRoute("GET", "/history", [HistoryController::class, "showForm"]);
+    $route->addRoute("POST", "/profile", [ProfileController::class, "walletStatus"]);
     $route->addRoute("GET", "/logout", [logout::class, "logout"]);
 //    $route->addRoute("POST", "/changeEmail", [ChangeEmailController::class,"showForm"]);
 //    $route->addRoute("POST", "/changePassword", [ChangePasswordController::class,"changePassword"]);
