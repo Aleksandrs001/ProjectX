@@ -2,6 +2,7 @@
 
 require_once 'vendor/autoload.php';
 
+use App\Controllers\CoinTransferController;
 use App\Controllers\CryptoCurrencyController;
 use App\Controllers\HistoryController;
 use App\Controllers\LoginController;
@@ -27,6 +28,7 @@ $dotenv->load();
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $route) {
     $route->addRoute("GET", "/", [CryptoCurrencyController::class, "index"]);
     $route->addRoute("GET", "/crypto{symbol}", [CryptoCurrencyController::class, "showForm"]);
+    $route->addRoute("GET", "/coinTransfer", [CoinTransferController::class, "transfer"]);
     $route->addRoute("POST", "/buy/crypto{symbol}", [BuyController::class, "buyCryptoCurrency"]);
     $route->addRoute("POST", "/sell/crypto{symbol}", [SellController::class, "sellCryptoCurrency"]);
 //    $route->addRoute("GET", "/buy/{symbol}", [BuyController::class, "buyCryptoCurrency"]);
