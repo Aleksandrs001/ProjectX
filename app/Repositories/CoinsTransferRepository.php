@@ -24,7 +24,7 @@ class CoinsTransferRepository
         }
         return $userSymbols;
     }
-    public function startOperation($postDatas)
+    public function startOperation($postDatas): Redirect
     {
         $resultSet = DatabaseRepository::getConnection()->executeQuery(
             'select coin_symbol, coin_amount from users_crypto_profiles where user_id = ?', [Session::getData("id")]);
