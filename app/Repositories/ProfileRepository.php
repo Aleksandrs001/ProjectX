@@ -11,7 +11,7 @@ class ProfileRepository
     public function showTotalInMoneyBag(): float
     {
         $resultSet = DatabaseRepository::getConnection()->executeQuery(
-            'select date,money_bag from users_crypto_profiles where user_id = ?', [$_SESSION["id"]]);
+            'select date,money_bag from users_crypto_profiles where user_id = ?', [ Session::getData("id")]);
 
         $userDBmoney = $resultSet->fetchAllAssociative();
         $totalMoneyInAccount = 0;
