@@ -18,10 +18,10 @@ class ChangeEmailController
 
     public function changeEmail()
     {
-        $oldEmail = $_POST["oldEmail"];
-        $newEmail = $_POST["newEmail"];
-        $reEmail = $_POST["reEmail"];
-        $accId = $_SESSION["id"];
+        $oldEmail =(string) $_POST["oldEmail"];
+        $newEmail =(string) $_POST["newEmail"];
+        $reEmail =(string) $_POST["reEmail"];
+        $accId =(string) $_SESSION["id"];
         $resultSet = DatabaseRepository::getConnection()->executeQuery('SELECT id, email FROM `crypto`.users WHERE id = ?', [$accId]);
         $user = $resultSet->fetchAssociative();
 

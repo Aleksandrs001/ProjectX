@@ -20,12 +20,12 @@ class CoinTransferController
     public function transferMoney(): object
     {
         $postDatas = new CoinTransferServiceRequest(
-            $login = $_POST["login"],
-            $email = $_POST["email"],
-            $password = md5($_POST["password"]),
-            $recipient = $_POST["recipient"],
-            $amount = $_POST["amount"],
-            $currency = $_POST["currency"]
+            $login =(string) $_POST["login"],
+            $email =(string) $_POST["email"],
+            $password =md5((string) $_POST["password"]),
+            $recipient =(int) $_POST["recipient"],
+            $amount =(float) $_POST["amount"],
+            $currency =(string) $_POST["currency"]
         );
         $start = new CoinTransferService();
         return $start->transfer($postDatas);

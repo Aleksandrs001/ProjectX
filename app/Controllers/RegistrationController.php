@@ -21,11 +21,11 @@ class RegistrationController
         $registerService = new RegistrationService();
         $registerService->execute(
             new RegisterServiceRequest(
-                $_POST['name'],
-                $_POST['login'],
-                $_POST['email'],
-                $_POST['password'],
-                $_FILES['avatar']
+                (string) $_POST['name'],
+                (string)   $_POST['login'],
+                (string) $_POST['email'],
+                (string) $_POST['password'],
+                (array)  $_FILES['avatar']
             )
         );
         return new Redirect("/registration");

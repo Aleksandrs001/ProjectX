@@ -14,8 +14,8 @@ class LoginController
     }
     public function enter(): Redirect
     {
-        $login=$_POST['login'];
-        $password=md5($_POST['password']);
+        $login=(string) $_POST['login'];
+        $password=md5((string) $_POST['password']);
         $start = new LoginService();
         return $start->getIn($login, $password);
     }
