@@ -11,13 +11,17 @@ class ProfileServiceRequest extends CryptoCurrenciesCollection
     public ?string $coinPrice;
     public ?string $date;
     public ?string $moneyBag;
+    private ?string $description;
 
     public function __construct(
                                 ?string $coinSymbol=null,
                                 ?string $coinAmount=null,
                                 ?string $coinPrice=null,
                                 ?string $date=null,
-                                ?string $moneyBag=null
+                                ?string $moneyBag=null,
+        ?string $description=null
+
+
     )
     {
         $this->coinSymbol = $coinSymbol;
@@ -25,6 +29,7 @@ class ProfileServiceRequest extends CryptoCurrenciesCollection
         $this->coinPrice = $coinPrice;
         $this->date = $date;
         $this->moneyBag = $moneyBag;
+        $this->description = $description;
     }
 
     public function getCoinSymbol(): ?string
@@ -50,5 +55,10 @@ class ProfileServiceRequest extends CryptoCurrenciesCollection
     public function getMoneyBag(): ?string
     {
         return $this->moneyBag;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
     }
 }

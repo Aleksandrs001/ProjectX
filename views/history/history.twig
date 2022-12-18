@@ -42,6 +42,7 @@
             <th class="px-4 py-2">Money in Wallet</th>
             <th class="px-4 py-2">Coin Price</th>
             <th class="px-4 py-2">Date</th>
+            <th class="px-4 py-2">Description</th>
         </tr>
         </thead>
         <tbody>
@@ -52,11 +53,10 @@
                 <td class="border px-4 py-2 {% if user.getMoneyBag < 0 %}text-red-700{% else %}text-green-700{% endif %}">{{ user.getmoneybag|number_format(2) }}</td>
                 <td class="border px-4 py-2"> {{ user.getCoinPrice }}</td>
                 <td class="border px-4 py-2">{{ user.getDate }}</td>
+                <td class="border px-4 py-2">{{ user.getDescription}}</td>
             </tr>
         {% endfor %}
 
-
-        {{ session.message }}
 
 </body>
 </html>

@@ -20,7 +20,8 @@ class HistoryRepository
                 $user["coin_amount"],
                 $user["coin_price"],
                 $user["date"],
-                $user["money_bag"]
+                $user["money_bag"],
+                $user["description"]
             ));
         }
         return $collection;

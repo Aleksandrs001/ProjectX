@@ -8,26 +8,26 @@ use App\Models\CoinTransferServiceRequest;
 
 class CoinTransferController
 {
+    public array $start;
+
     public function transfer(): Template
     {
-
-        return new Template("coinTransfer/transfer.twig");
+        $start = new CoinTransferService();
+        $this->start = $start->showUserAccinfo();
+        return new Template("coinTransfer/transfer.twig", ["start" => $this->start]);
     }
 
-    public function transferMoney()
+    public function transferMoney(): object
     {
-//        var_dump($_POST["login"],$_POST["email"], $_POST["password"]);die;
-        $postDatas= new CoinTransferServiceRequest(
-        $login = $_POST["login"],
-        $email = $_POST["email"],
-        $password = md5($_POST["password"])
-    );
-
-
-        $start= new CoinTransferService($postDatas);
-//        $start->Transfer($postDatas);
-
-
-        return ;
+        $postDatas = new CoinTransferServiceRequest(
+            $login = $_POST["login"],
+            $email = $_POST["email"],
+            $password = md5($_POST["password"]),
+            $recipient = $_POST["recipient"],
+            $amount = $_POST["amount"],
+            $currency = $_POST["currency"]
+        );
+        $start = new CoinTransferService();
+        return $start->transfer($postDatas);
     }
 }

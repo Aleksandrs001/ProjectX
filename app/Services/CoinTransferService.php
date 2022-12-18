@@ -6,36 +6,14 @@ use App\Repositories\CoinsTransferRepository;
 
 class CoinTransferService
 {
-
-
-    public function __construct($postDatas)
+    public function showUserAccinfo(): array
     {
-
-       $a= new CoinsTransferRepository($postDatas);
+        $start= new CoinsTransferRepository();
+        return  $start->showSymbolNameAndAmount();
     }
-
-
-    public function Transfer($postDatas)
+    public function transfer($postDatas): object
     {
-//        var_dump($postDatas);die;
-        $start=new CoinsTransferRepository($postDatas);
-
+       $start= new CoinsTransferRepository();
+       return  $start->startOperation($postDatas);
     }
-//
-//    public function getEmail(): string
-//    {
-//        return $this->email;
-//    }
-//
-//    public function getLogin(): string
-//    {
-//        return $this->login;
-//    }
-//
-//    public function getPassword(): string
-//    {
-//        return $this->password;
-//    }
-
-
 }
