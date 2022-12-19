@@ -42,18 +42,18 @@ class CoinsTransferRepository
                 $postDatas->currency,
             ]
         );
-        $users = $resultSet->fetchAllAssociative();
+        $checkForMaxCoinAmount = $resultSet->fetchAllAssociative();
+
         $userCoinsSymbolsInDB = [];
         $DBuserCoinAmount="";
 
-        foreach ($users as $symbols) {
+        foreach ($checkForMaxCoinAmount as $symbols) {
             $userCoinsSymbolsInDB[$symbols["coin_symbol"]][]= $symbols["coin_amount"];
         }
-        foreach ($userCoinsSymbolsInDB as $key => $value) {
+        foreach ($userCoinsSymbolsInDB as $value) {
             $DBuserCoinAmount= array_sum($value);
         }
 
-//        var_dump($DBuserCoinAmount);die;
         if($DBuserCoinAmount>=$postDatas->amount) {
             $resultSet = DatabaseRepository::getConnection()->executeQuery(
 
