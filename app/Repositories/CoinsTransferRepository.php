@@ -31,17 +31,40 @@ class CoinsTransferRepository
         }
         return $this->userSymbols=$userSymbols;
     }
+
     public function startOperation($postDatas): Redirect
     {
+
         $resultSet = DatabaseRepository::getConnection()->executeQuery(
-
-            'select login, email, password from users where id = ?',
+            'select coin_symbol, coin_amount from users_crypto_profiles where user_id= ? and coin_symbol=? ',
             [
-                Session::getData("id")
+                Session::getData("id"),
+                $postDatas->currency,
             ]
-        );echo"<pre>";
-
+        );
         $users = $resultSet->fetchAllAssociative();
+        $userCoinsSymbolsInDB = [];
+        $DBuserCoinAmount="";
+
+        foreach ($users as $symbols) {
+            $userCoinsSymbolsInDB[$symbols["coin_symbol"]][]= $symbols["coin_amount"];
+        }
+        foreach ($userCoinsSymbolsInDB as $key => $value) {
+            $DBuserCoinAmount= array_sum($value);
+        }
+
+//        var_dump($DBuserCoinAmount);die;
+        if($DBuserCoinAmount>=$postDatas->amount) {
+            $resultSet = DatabaseRepository::getConnection()->executeQuery(
+
+                'select login, email, password from users where id = ?',
+                [
+                    Session::getData("id")
+                ]
+            );
+            echo "<pre>";
+
+            $users = $resultSet->fetchAllAssociative();
 
             if ($users[0]["login"] == $postDatas->login &&
                 $users[0]["email"] == $postDatas->email &&
@@ -87,6 +110,10 @@ class CoinsTransferRepository
                 Session::put("message", "wrong login, email or password");
                 return new Redirect("/coinTransfer");
             }
+        }else{
+            Session::put("message", "you don't have enough {$postDatas->currency} to transfer");
+            return new Redirect("/coinTransfer");
+        }
 
 
     }

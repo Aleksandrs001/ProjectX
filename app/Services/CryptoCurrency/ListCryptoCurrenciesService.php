@@ -19,7 +19,6 @@ class ListCryptoCurrenciesService
     {
         $cryptoCurrencies = $this->cryptoCurrenciesRepository->fetchAllBySymbols($symbols);
         foreach ($cryptoCurrencies as $cryptoCurrency) {
-//            var_dump($cryptoCurrency);die;
             $quote = $this->cryptoCurrenciesRepository->fetchAllBySymbols($cryptoCurrency->getSymbol());
             $cryptoCurrency->setQuote($quote);
         }
