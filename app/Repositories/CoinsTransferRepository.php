@@ -6,6 +6,7 @@ use App\Session;
 use App\Redirect;
 use Carbon\Carbon;
 use App\Models\PipeRequest;
+use Doctrine\DBAL\Exception;
 
 class CoinsTransferRepository
 {
@@ -32,6 +33,7 @@ class CoinsTransferRepository
         return $this->userSymbols=$userSymbols;
     }
 
+
     public function startOperation($postDatas): Redirect
     {
 
@@ -45,16 +47,16 @@ class CoinsTransferRepository
         $checkForMaxCoinAmount = $resultSet->fetchAllAssociative();
 
         $userCoinsSymbolsInDB = [];
-        $DBuserCoinAmount="";
+        $DB_userCoinAmount="";
 
         foreach ($checkForMaxCoinAmount as $symbols) {
             $userCoinsSymbolsInDB[$symbols["coin_symbol"]][]= $symbols["coin_amount"];
         }
         foreach ($userCoinsSymbolsInDB as $value) {
-            $DBuserCoinAmount= array_sum($value);
+            $DB_userCoinAmount= array_sum($value);
         }
 
-        if($DBuserCoinAmount>=$postDatas->amount) {
+        if($DB_userCoinAmount>=$postDatas->amount) {
             $resultSet = DatabaseRepository::getConnection()->executeQuery(
 
                 'select login, email, password from users where id = ?',
@@ -62,7 +64,6 @@ class CoinsTransferRepository
                     Session::getData("id")
                 ]
             );
-            echo "<pre>";
 
             $users = $resultSet->fetchAllAssociative();
 
@@ -80,7 +81,7 @@ class CoinsTransferRepository
                                       date = ?',
                     [
                         $postDatas->currency,
-                        "-{$postDatas->amount}",
+                        "-$postDatas->amount",
                         "transfer to user id:" . $postDatas->recipient,
                         0,
                         Session::getData("id"),
@@ -97,24 +98,20 @@ class CoinsTransferRepository
                                       date = ?',
                     [
                         $postDatas->currency,
-                        "+{$postDatas->amount}",
+                        "+$postDatas->amount",
                         "transfer From user id:" . Session::getData("id"),
                         0,
                         $postDatas->recipient, Carbon::now()
                     ]
                 );
-                Session::put("message", "you have successfully transferred {$postDatas->amount}
-         {$postDatas->currency} to user id: {$postDatas->recipient}");
-                return new Redirect("/coinTransfer");
+                Session::put("message", "you have successfully transferred $postDatas->amount
+         $postDatas->currency to user id: $postDatas->recipient");
             } else {
                 Session::put("message", "wrong login, email or password");
-                return new Redirect("/coinTransfer");
             }
         }else{
-            Session::put("message", "you don't have enough {$postDatas->currency} to transfer");
-            return new Redirect("/coinTransfer");
+            Session::put("message", "you don't have enough $postDatas->currency to transfer");
         }
-
-
+        return new Redirect("/coinTransfer");
     }
 }
