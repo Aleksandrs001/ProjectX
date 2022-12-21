@@ -2,6 +2,7 @@
 
 require_once 'vendor/autoload.php';
 
+use App\Controllers\ShortsHistoryController;
 use App\logout;
 use App\Session;
 use App\Redirect;
@@ -11,9 +12,12 @@ use Twig\Environment ;
 use Twig\Loader\FilesystemLoader;
 use App\Controllers\BuyController;
 use App\Controllers\SellController;
+use App\Controllers\ShortsController;
 use App\Controllers\LoginController;
 use App\Controllers\ProfileController;
 use App\Controllers\HistoryController;
+use App\Controllers\BuyShortsController;
+use App\Controllers\SellShortsController;
 use App\Controllers\ChangeEmailController;
 use App\Controllers\RegistrationController;
 use App\Controllers\CoinTransferController;
@@ -24,6 +28,7 @@ Session::initialize();
 
 $dotenv = Dotenv::createImmutable('dotenv');
 $dotenv->load();
+$container = new DI\Container();
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $route) {
     $route->addRoute("GET", "/", [CryptoCurrencyController::class, "index"]);
@@ -33,6 +38,10 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $route->addRoute("GET", "/coinTransfer", [CoinTransferController::class, "transfer"]);
     $route->addRoute("POST", "/coinTransfer", [CoinTransferController::class, "transferMoney"]);
     $route->addRoute("GET", "/registration", [RegistrationController::class, "showForm"]);
+    $route->addRoute("GET", "/short", [ShortsController::class, "showForm"]);
+    $route->addRoute("GET", "/shortsHistory", [ShortsHistoryController::class, "showForm"]);
+    $route->addRoute("POST", "/buyShort", [BuyShortsController::class, "buyShorts"]);
+    $route->addRoute("POST", "/sellShort", [SellShortsController::class, "sellShorts"]);
     $route->addRoute("POST", "/registration", [RegistrationController::class, "store"]);
     $route->addRoute("GET", "/login", [LoginController::class, "showForm"]);
     $route->addRoute("POST", "/login", [LoginController::class, "enter"]);
@@ -71,7 +80,8 @@ switch ($routeInfo[0]) {
         $vars = $routeInfo[2];
         [$controller, $method] = $handler;
 
-        $response = (new $controller)->{$method}($vars);
+//        $response = (new $controller)->{$method}($vars);
+        $response = $container->get($controller)->{$method}($vars);
 
         if ($response instanceof Template) {
             echo $twig->render($response->getPath(), $response->getParams());

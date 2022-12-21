@@ -4,13 +4,14 @@ namespace App\Repositories;
 
 use App\Models\ProfileServiceRequest;
 use App\Models\Collections\CryptoCurrenciesCollection;
+use App\Session;
 
 class HistoryRepository
 {
     public function showAllTransactions(): CryptoCurrenciesCollection
     {
         $resultSet = DatabaseRepository::getConnection()->executeQuery(
-            'select * from users_crypto_profiles where user_id = ?', [$_SESSION["id"]]);
+            'select * from users_crypto_profiles where user_id = ?', [Session::getData("id")]);
         $users = $resultSet->fetchAllAssociative();
         $collection = new CryptoCurrenciesCollection();
 

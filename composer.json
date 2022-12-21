@@ -12,6 +12,7 @@
     "doctrine/dbal": "^3.5",
     "twig/twig": "^3.4",
     "guzzlehttp/guzzle": "^7.5",
-    "nesbot/carbon": "^2.64"
+    "nesbot/carbon": "^2.64",
+    "php-di/php-di": "^6.4"
   }
 }

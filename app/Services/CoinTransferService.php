@@ -3,10 +3,11 @@
 namespace App\Services;
 
 use App\Repositories\CoinsTransferRepository;
+use App\Models\Collections\CryptoCurrenciesCollection;
 
 class CoinTransferService
 {
-    public function showUserAccinfo(): array
+    public function showUserAccinfo(): CryptoCurrenciesCollection
     {
         $start= new CoinsTransferRepository();
         return  $start->showSymbolNameAndAmount();

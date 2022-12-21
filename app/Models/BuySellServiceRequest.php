@@ -7,21 +7,21 @@ class BuySellServiceRequest
     public float $amount;
     public string $symbol;
 
-    public function __construct(float $amount,
-                                string $symbol
+    public function __construct(
+                                string $symbol,
+                                float $amount
     )
     {
         $this->amount = $amount;
         $this->symbol = $symbol;
     }
 
-    public function getAmount(): float
-    {
-        return $this->amount;
-    }
-
     public function getSymbol(): string
     {
         return $this->symbol;
+    }
+    public function getAmount(): float
+    {
+        return $this->amount;
     }
 }

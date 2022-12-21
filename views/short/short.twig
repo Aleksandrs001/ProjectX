@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Buy/Sell shorts</title>
+</head>
+<body>
+
+<div class="containers mx-auto px-7 relative" id="1">
+    <ul class="absolute right-10 top-0 shadow-md">
+        {% if session.name %}
+            <p class="font-bold">Welcome {{ session.name }}</p> <br>
+        {% endif %}
+
+        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+            <a href="/" class="hover:bg-gray-700">Home</a>
+        </li>
+        {% if session.name %}
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                <a href="/profile" class="hover:bg-gray-700">Profile</a>
+            </li>
+        {% endif %}
+
+        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+            <a href="/shortsHistory" class="hover:bg-gray-700">Shorts History</a>
+        </li>
+
+        {% if not session.name %}
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                <a href="/login" class="hover:bg-gray-700">Log In</a>
+            </li>
+        {% endif %}
+
+        {% if not session.name %}
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                <a href="/registration" class="hover:bg-gray-700">Register</a>
+            </li>
+        {% endif %}
+
+        {% if session.name %}
+        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+            <a href="/logout" class="hover:bg-gray-700">Log Out</a>
+            {% endif %}
+        </li>
+    </ul>
+</div>
+
+<form action="/buyShort" method="post">
+    <div class="max-w-sm rounded overflow-hidden shadow-lg m-auto mt-10">
+        <div class="px-6 py-4">
+            <div class="mb-4"><br>
+                <label class=" font-bold text-xl mb-2"
+                       for="currency">Buy shorts:</label><br>
+            </div>
+                <select class="block text-gray-700 text-sm font-bold mb-2" id="currency" name="currency">
+                    {% for respond in start %}
+                        <option value="{{ respond.getSymbol }}">{{ respond.getSymbol }} Price: {{ respond.getPrice|number_format(3) }}$
+                        </option>
+                    {% endfor %}
+                </select><br>
+
+            <div class="mb-4">
+
+                    <div class="mb-4"><br>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">Amount:</label><br>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                               type="text"
+                               id="amount"
+                               name="amount"
+                               placeholder="Enter amount"
+                               required
+                        ><br>
+
+                            <button class=" bg-blue-500 hover:bg-blue-700 rounded-lg shadow-lg py-2 px-3 text-white font-bold mt-3 focus:outline-none focus:shadow-outline"
+                                    type="submit">Buy
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+</form>
+    <form action="/sellShort" method="post">
+        <div class="max-w-sm rounded overflow-hidden shadow-lg m-auto mt-10">
+            <div class="px-6 py-4">
+                <div class="mb-4"><br>
+                    <label class=" font-bold text-xl mb-2"
+                           for="currency">Sell shorts:</label><br>
+                </div>
+
+                <select class="block text-gray-700 text-sm font-bold mb-2" id="currency" name="currency">
+                    {% for userData in finish  %}
+
+                        <option value="{{ userData.getCoinsSymbol }}">{{ userData.getCoinsSymbol }}: you
+                            have: {{ userData.getCoinsCount}} coin/s.
+                        </option>
+                    {% endfor %}
+                </select><br>
+
+                <div class="mb-4">
+
+                    <div class="mb-4"><br>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">Amount:</label><br>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                               type="text"
+                               id="amount"
+                               name="amount"
+                               placeholder="Enter amount"
+                               required
+                        ><br>
+
+                        <button class=" bg-blue-500 hover:bg-blue-700 rounded-lg shadow-lg py-2 px-3 text-white font-bold mt-3 focus:outline-none focus:shadow-outline"
+                                type="submit">Sell
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    <div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center ">
+        {{ session.message }}
+    </div>
+</form>
+
+
+</body>
+</html>

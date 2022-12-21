@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-class PipeRequest
+class PipeRequest extends \App\Models\Collections\CryptoCurrenciesCollection
 {
     public string $CoinsSymbol;
     public float $CoinsCount;
+
 
     public function __construct
     (
@@ -15,6 +16,7 @@ class PipeRequest
     {
         $this->CoinsSymbol = $CoinsSymbol;
         $this->CoinsCount = $CoinsCount;
+
     }
     public function getCoinsSymbol(): string
     {

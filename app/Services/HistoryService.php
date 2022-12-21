@@ -2,13 +2,14 @@
 namespace App\Services;
 
 use App\Repositories\HistoryRepository;
+use App\Models\Collections\CryptoCurrenciesCollection;
 
 class HistoryService
 {
-    public function showHistory(): array
+    public function showHistory(): CryptoCurrenciesCollection
     {
         $history = new HistoryRepository();
-        $history = $history->showAllTransactions();
-        return $history->all();
+
+        return $history->showAllTransactions();
     }
 }

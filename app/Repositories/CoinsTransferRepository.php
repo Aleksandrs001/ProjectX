@@ -2,18 +2,20 @@
 
 namespace App\Repositories;
 
+use App\Models\CoinTransferServiceRequest;
+use App\Models\Collections\CryptoCurrenciesCollection;
 use App\Session;
 use App\Redirect;
 use Carbon\Carbon;
 use App\Models\PipeRequest;
-use Doctrine\DBAL\Exception;
 
 class CoinsTransferRepository
 {
     public array $userSymbols=[];
 
-    public function showSymbolNameAndAmount(): array
+    public function showSymbolNameAndAmount(): CryptoCurrenciesCollection
     {
+        $collection = new CryptoCurrenciesCollection();
         $resultSet = DatabaseRepository::getConnection()->executeQuery(
             'select coin_symbol, coin_amount from users_crypto_profiles where user_id = ?',
             [
@@ -28,20 +30,20 @@ class CoinsTransferRepository
                 $userCoinsSymbolsInDB[$symbols["coin_symbol"]][]= $symbols["coin_amount"];
         }
         foreach ($userCoinsSymbolsInDB as $key => $value) {
-            if( array_sum($value) > 0 )$userSymbols[] =new PipeRequest( $key, array_sum($value));
+            if( array_sum($value) > 0 )$collection->add( new PipeRequest( $key, array_sum($value)));
         }
-        return $this->userSymbols=$userSymbols;
+        return $collection;
     }
 
 
-    public function startOperation($postDatas): Redirect
+    public function startOperation(CoinTransferServiceRequest $postDatas): Redirect
     {
 
         $resultSet = DatabaseRepository::getConnection()->executeQuery(
             'select coin_symbol, coin_amount from users_crypto_profiles where user_id= ? and coin_symbol=? ',
             [
                 Session::getData("id"),
-                $postDatas->currency,
+                $postDatas->getCurrency(),
             ]
         );
         $checkForMaxCoinAmount = $resultSet->fetchAllAssociative();
@@ -64,12 +66,14 @@ class CoinsTransferRepository
                     Session::getData("id")
                 ]
             );
-
             $users = $resultSet->fetchAllAssociative();
-
-            if ($users[0]["login"] == $postDatas->login &&
-                $users[0]["email"] == $postDatas->email &&
-                $users[0]["password"] == $postDatas->password
+            $userInfo=[];
+            foreach ($users as $user){
+                $userInfo=$user;
+            }
+            if ($userInfo["login"] == $postDatas->getLogin() &&
+                $userInfo["email"] == $postDatas->getEmail() &&
+                $userInfo["password"] == $postDatas->getPassword()
             ) {
                 DatabaseRepository::getConnection()->executeQuery(
                     'INSERT INTO users_crypto_profiles SET
@@ -80,9 +84,9 @@ class CoinsTransferRepository
                                       user_id = ?,
                                       date = ?',
                     [
-                        $postDatas->currency,
-                        "-$postDatas->amount",
-                        "transfer to user id:" . $postDatas->recipient,
+                        $postDatas->getCurrency(),
+                        "-{$postDatas->getAmount()}",
+                        "transfer to user id:" . $postDatas->getRecipient(),
                         0,
                         Session::getData("id"),
                         Carbon::now()
@@ -97,20 +101,20 @@ class CoinsTransferRepository
                                       user_id = ?,
                                       date = ?',
                     [
-                        $postDatas->currency,
-                        "+$postDatas->amount",
+                        $postDatas->getCurrency(),
+                        "+{$postDatas->getAmount()}",
                         "transfer From user id:" . Session::getData("id"),
                         0,
                         $postDatas->recipient, Carbon::now()
                     ]
                 );
-                Session::put("message", "you have successfully transferred $postDatas->amount
-         $postDatas->currency to user id: $postDatas->recipient");
+                Session::put("message", "you have successfully transferred {$postDatas->getAmount()}
+         {$postDatas->getCurrency()} to user id: {$postDatas->getRecipient()}");
             } else {
                 Session::put("message", "wrong login, email or password");
             }
         }else{
-            Session::put("message", "you don't have enough $postDatas->currency to transfer");
+            Session::put("message", "you don't have enough {$postDatas->getCurrency()} to transfer");
         }
         return new Redirect("/coinTransfer");
     }

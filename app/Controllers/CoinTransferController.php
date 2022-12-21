@@ -13,7 +13,7 @@ class CoinTransferController
     public function transfer(): Template
     {
         $start = new CoinTransferService();
-        $this->start = $start->showUserAccinfo();
+        $this->start = $start->showUserAccinfo()->all();
         return new Template("coinTransfer/transfer.twig", ["start" => $this->start]);
     }
 

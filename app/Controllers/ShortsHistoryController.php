@@ -3,19 +3,20 @@
 namespace App\Controllers;
 
 use App\Template;
-use App\Services\HistoryService;
+use App\Services\ShortsService;
 
-class HistoryController
+class ShortsHistoryController
 {
+
     public function showForm(): Template
     {
-        $allTransactions = new HistoryService();
+        $allTransactions = new ShortsService();
         $history=$allTransactions->showHistory();
-
-        return new Template("history/history.twig",
+        return new Template("short/shortsHistory.twig",
             [
                 "userData"=>$history->all()
             ]
         );
     }
+
 }
