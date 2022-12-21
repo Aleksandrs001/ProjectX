@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Services\ProfileService;
 use App\Template;
 use App\Services\CoinTransferService;
 use App\Models\CoinTransferServiceRequest;
@@ -12,9 +13,16 @@ class CoinTransferController
 
     public function transfer(): Template
     {
+        $totalMoneyInAccount = new profileService();
+        $totalMoneyInAccount = $totalMoneyInAccount->sumInWallet();
         $start = new CoinTransferService();
         $this->start = $start->showUserAccinfo()->all();
-        return new Template("coinTransfer/transfer.twig", ["start" => $this->start]);
+        return new Template("coinTransfer/transfer.twig", [
+            "start" => $this->start,
+                "items"=>$totalMoneyInAccount
+
+        ]
+        );
     }
 
     public function transferMoney(): object
