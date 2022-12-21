@@ -4,6 +4,8 @@ require_once 'vendor/autoload.php';
 
 use App\Controllers\ShortsHistoryController;
 use App\logout;
+use App\Repositories\CoinMarketCapCryptoCurrencyRepository;
+use App\Repositories\CryptoCurrenciesRepository;
 use App\Session;
 use App\Redirect;
 use App\Template;
@@ -29,6 +31,11 @@ Session::initialize();
 $dotenv = Dotenv::createImmutable('dotenv');
 $dotenv->load();
 $container = new DI\Container();
+$container->set( CryptoCurrenciesRepository::class,
+    \DI\create(CoinMarketCapCryptoCurrencyRepository::class)
+);
+
+
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $route) {
     $route->addRoute("GET", "/", [CryptoCurrencyController::class, "index"]);

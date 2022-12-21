@@ -11,10 +11,21 @@ use App\Models\Pipe2request;
 use App\Models\BuySellServiceRequest;
 use App\Models\ProfileServiceRequest;
 use App\Models\Collections\CryptoCurrenciesCollection;
-use App\Services\CryptoCurrency\ListCryptoCurrenciesService;
+use App\Services\CryptoCurrency\ShowCryptoCurrencyService;
 
 class ShortsRepository
 {
+
+    private ShowCryptoCurrencyService $showCryptoCurrencyService;
+
+    public function __construct(
+
+        ShowCryptoCurrencyService $showCryptoCurrencyService
+    )
+    {
+
+        $this->showCryptoCurrencyService = $showCryptoCurrencyService;
+    }
 
 
     public function showAccInfo(): CryptoCurrenciesCollection
@@ -106,9 +117,9 @@ class ShortsRepository
     }
     public function buyShorts(BuySellServiceRequest $fromPost): Redirect
     {
-        $newConnect = new ListCryptoCurrenciesService();
-        $getCoinInfo = $newConnect->execute([$fromPost->getSymbol()]);
-        $getCoinInfo = new PriceRequest( $getCoinInfo->all()[0]->price);
+
+        $getCoinInfo = $this->showCryptoCurrencyService->execute($fromPost->getSymbol());
+        $getCoinInfo = new PriceRequest( $getCoinInfo->getPrice());
 
         DatabaseRepository::getConnection()->executeQuery(
             'INSERT INTO shorts SET
@@ -134,9 +145,9 @@ class ShortsRepository
     public function sellShorts($fromPost): Redirect
     {
 
-        $newConnect = new ListCryptoCurrenciesService();
-        $getCoinInfo = $newConnect->execute([$fromPost->getSymbol()]);
-        $getCoinInfo = new PriceRequest( $getCoinInfo->all()[0]->price);
+
+        $getCoinInfo =$this->showCryptoCurrencyService->execute($fromPost->getSymbol());
+        $getCoinInfo = new PriceRequest( $getCoinInfo->getPrice());
         DatabaseRepository::getConnection()->executeQuery(
             'INSERT INTO shorts SET
                                       coin_symbol_shorts = ?,
@@ -155,7 +166,7 @@ class ShortsRepository
             ]
         );
 
-        Session::put("message", "Congrats! successfully Sell rented" ." ". $fromPost->getAmount() . " " . $fromPost->getSymbol() . " " . $getCoinInfo->getPrice() . "$");
+        Session::put("message", "Congrats! successfully Sold rented" ." ". $fromPost->getAmount() . " " . $fromPost->getSymbol() . " " . $getCoinInfo->getPrice() . "$");
         return new Redirect("/short");
     }
 }

@@ -46,4 +46,54 @@ class CoinMarketCapCryptoCurrencyRepository implements CryptoCurrenciesRepositor
         }
         return $cryptoCurrencies;
     }
+
+    public function fetchBySymbol(string $symbol): CryptoCurrency
+    {
+        $response = $this->httpClient->request('GET', 'quotes/latest', [
+            "headers" => [
+                "Accepts" => "application/json",
+                "X-CMC_PRO_API_KEY" => $_ENV["SECRET_KEY"]
+            ],
+            "query" => [
+                "symbol" => $symbol,
+                "convert" => "USD"
+            ]
+        ]);
+        $response = json_decode($response->getBody()->getContents());
+
+        $currency = $response->data->$symbol;
+
+        return new CryptoCurrency(
+            $currency->symbol,
+            $currency->name,
+            $currency->quote->USD->price,
+            $currency->quote->USD->percent_change_1h,
+            $currency->quote->USD->percent_change_24h,
+            $currency->quote->USD->percent_change_7d
+        );
+    }
+
+    public function fetchQuote(string $symbol): Quote
+    {
+        $response = $this->httpClient->request('GET', 'quotes/latest', [
+            "headers" => [
+                "Accepts" => "application/json",
+                "X-CMC_PRO_API_KEY" => $_ENV["SECRET_KEY"]
+            ],
+            "query" => [
+                "symbol" => $symbol,
+                "convert" => "USD"
+            ]
+        ]);
+        $response = json_decode($response->getBody()->getContents());
+
+        $currency = $response->data->$symbol;
+
+        return new Quote(
+            $currency->quote->USD->price,
+            $currency->quote->USD->percent_change_1h,
+            $currency->quote->USD->percent_change_24h,
+            $currency->quote->USD->percent_change_7d
+        );
+    }
 }

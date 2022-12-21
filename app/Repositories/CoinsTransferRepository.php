@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Models\CoinTransferServiceRequest;
-use App\Models\Collections\CryptoCurrenciesCollection;
 use App\Session;
 use App\Redirect;
 use Carbon\Carbon;
 use App\Models\PipeRequest;
+use App\Models\CoinTransferServiceRequest;
+use App\Models\Collections\CryptoCurrenciesCollection;
 
 class CoinsTransferRepository
 {

@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Session;
 use App\Models\ProfileServiceRequest;
 use App\Models\Collections\CryptoCurrenciesCollection;
-use App\Session;
 
 class HistoryRepository
 {

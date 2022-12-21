@@ -18,8 +18,6 @@
 <div>
     <h4 class="welcome">MyCoinMarketCap</h4>
 </div>
-
-<div class="absolute top-20 left-0 right-1 ...">
     <div class="containers mx-auto px-7 relative" id="1">
         <ul class="absolute right-10 top-0 shadow-md">
             {% if session.name %}
@@ -62,17 +60,12 @@
             </li>
         </ul>
     </div>
-</div>
-
+</body>
+<body>
 
 <form class="max-w-sm mx-auto mt-10 center mx-auto" method="get">
-
-    <label>
-        <input class="form-input rounded-lg shadow-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-
-               type="text" name="symbols" value="" placeholder="Search">
-    </label>
-
+    <input class="form-input rounded-lg shadow-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+           type="text" name="symbols" value="" placeholder="Search">
     <button class="bg-blue-500 hover:bg-blue-700 rounded-lg shadow-lg py-2 px-3 text-white font-bold mt-3 focus:outline-none focus:shadow-outline"
             type="submit">Search
     </button>
@@ -86,6 +79,7 @@
        class="block rounded bg-gray-200 hover:bg-gray-300 px-3 py-2 mb-4 text-gray-700 font-semi-bold">
         <h2 class="text-xl font-bold">{{ respond.getSymbol }}</h2>
         <p>{{ respond.getName }}</p>
+        {{ respond.Name }}
 
 
         <p class="text-xl font-bold">{{ respond.getPrice|number_format(3) }} $</p>

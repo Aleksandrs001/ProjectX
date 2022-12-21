@@ -5,23 +5,25 @@ namespace App\Services;
 use App\Redirect;
 use App\Repositories\SellCryptoCurrencyRepository;
 use App\Services\CryptoCurrency\ListCryptoCurrenciesService;
+use App\Services\CryptoCurrency\ShowCryptoCurrencyService;
 
 class SellService
 {
+    public ShowCryptoCurrencyService $showCryptoCurrencyService;
+
+    public function __construct(ShowCryptoCurrencyService $showCryptoCurrencyService)
+    {
+        $this->showCryptoCurrencyService = $showCryptoCurrencyService;
+
+    }
     public function sellCrypto($sellService): Redirect
     {
 
         $symbol = $sellService->getSymbol();
         $amount = $sellService->getAmount();
         $repo = new SellCryptoCurrencyRepository();
-        $newConnect = new ListCryptoCurrenciesService();
-        $getCoinInfo = $newConnect->execute([$symbol]);
+        $getCoinInfo = $this->showCryptoCurrencyService->execute($symbol)->getPrice();
 
-        $requestedCoinPrice = 0;
-        foreach ($getCoinInfo->all() as $getPriceFromApi) {
-            $requestedCoinPrice = $getPriceFromApi->price;
-        }
-
-        return $repo->sellCryptoCurrency($requestedCoinPrice, $symbol, $amount);
+        return $repo->sellCryptoCurrency($getCoinInfo, $symbol, $amount);
     }
 }

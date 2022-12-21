@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class PipeRequest extends \App\Models\Collections\CryptoCurrenciesCollection
+use App\Models\Collections\CryptoCurrenciesCollection;
+
+class PipeRequest extends CryptoCurrenciesCollection
 {
     public string $CoinsSymbol;
     public float $CoinsCount;
