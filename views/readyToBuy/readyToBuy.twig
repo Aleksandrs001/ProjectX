@@ -20,41 +20,48 @@
 </div>
 
 <div class="absolute top-20 left-0 right-1 ...">
-<div class="containers mx-auto px-7 relative" id="1">
-    <ul class="absolute right-10 top-0 shadow-md">
-        {% if session.name %}
-            <p class="font-bold">Welcome {{ session.name }}</p> <br>
-        {% endif %}
-
-        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-            <a href="/" class="hover:bg-gray-700">Home</a>
-        </li>
-
-
-        {% if not session.name %}
-            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-                <a href="/login" class="hover:bg-gray-700">Log In</a>
-            </li>
-        {% endif %}
-
-        {% if not session.name %}
-            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-                <a href="/registration" class="hover:bg-gray-700">Register</a>
-            </li>
-        {% endif %}
-
-        {% if session.name %}
-            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-                <a href="/profile" class="hover:bg-gray-700">Profile</a>
-            </li>
-        {% endif %}
-
-        {% if session.name %}
-        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-            <a href="/logout" class="hover:bg-gray-700">Log Out</a>
+    <div class="containers mx-auto px-7 relative" id="1">
+        <ul class="absolute right-10 top-0 shadow-md">
+            {% if session.name %}
+                <p class="font-bold">Welcome {{ session.name }}</p> <br>
             {% endif %}
-        </li>
-    </ul>
+
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                <a href="/" class="hover:bg-gray-700">Home</a>
+            </li>
+
+
+            {% if not session.name %}
+                <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                    <a href="/login" class="hover:bg-gray-700">Log In</a>
+                </li>
+            {% endif %}
+
+            {% if not session.name %}
+                <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                    <a href="/registration" class="hover:bg-gray-700">Register</a>
+                </li>
+            {% endif %}
+
+            {% if session.name %}
+                <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                    <a href="/profile" class="hover:bg-gray-700">Profile</a>
+                </li>
+            {% endif %}
+
+            {% if session.name %}
+                <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                    <a href="/short" class="hover:bg-gray-700">Shorts</a>
+                </li>
+            {% endif %}
+
+            {% if session.name %}
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                <a href="/logout" class="hover:bg-gray-700">Log Out</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
 </div>
 
 
@@ -74,36 +81,36 @@
 
 {% for respond in response %}
     <div>
-        <div class="container  m-14 mx-auto px-4">
-            <h href="/crypto{{ respond.getSymbol }}" methods="get"
-               class="block rounded bg-gray-200 hover:bg-gray-300 px-3 py-2 mb-4 text-gray-700 font-semi-bold">
-                <h2 class="text-xl font-bold">{{ respond.getSymbol }}</h2>
-                <p>{{ respond.getName }}</p>
+    <div class="container  m-14 mx-auto px-4">
+    <h href="/crypto{{ respond.getSymbol }}" methods="get"
+       class="block rounded bg-gray-200 hover:bg-gray-300 px-3 py-2 mb-4 text-gray-700 font-semi-bold">
+        <h2 class="text-xl font-bold">{{ respond.getSymbol }}</h2>
+        <p>{{ respond.getName }}</p>
 
 
-                <p class="text-xl font-bold">{{ respond.getPrice|number_format(3) }} $</p>
+        <p class="text-xl font-bold">{{ respond.getPrice|number_format(3) }} $</p>
 
-                {% if respond.getPercentChange1h < 0 %}
-                    <p class="text-red-500">{{ respond.getPercentChange1h|number_format(3) }}%</p>
-                {% else %}
-                    <p>{{ respond.getPercentChange1h|number_format(3) }}%</p>
-                {% endif %}
+        {% if respond.getPercentChange1h < 0 %}
+            <p class="text-red-500">{{ respond.getPercentChange1h|number_format(3) }}%</p>
+        {% else %}
+            <p>{{ respond.getPercentChange1h|number_format(3) }}%</p>
+        {% endif %}
 
-                {% if respond.getPercentChange24h < 0 %}
-                    <p class="text-red-500">{{ respond.getPercentChange24h|number_format(3) }}%</p>
-                {% else %}
-                    <p>{{ respond.getPercentChange24h|number_format(3) }}%</p>
-                {% endif %}
+        {% if respond.getPercentChange24h < 0 %}
+            <p class="text-red-500">{{ respond.getPercentChange24h|number_format(3) }}%</p>
+        {% else %}
+            <p>{{ respond.getPercentChange24h|number_format(3) }}%</p>
+        {% endif %}
 
-                {% if respond.getPercentChange7d < 0 %}
-                    <p class="text-red-500">{{ respond.getPercentChange7d|number_format(3) }}%</p>
-                {% else %}
-                    <p>{{ respond.getPercentChange7d|number_format(3) }}%</p>
-                {% endif %}
-            </h>
-            {% if session.name %}
+        {% if respond.getPercentChange7d < 0 %}
+            <p class="text-red-500">{{ respond.getPercentChange7d|number_format(3) }}%</p>
+        {% else %}
+            <p>{{ respond.getPercentChange7d|number_format(3) }}%</p>
+        {% endif %}
+    </h>
+    {% if session.name %}
 
-<div>
+        <div>
             <form action="/buy/crypto{{ respond.getSymbol }}" method="post">
 
                 <label>
@@ -112,22 +119,22 @@
                 <button class="px-4 py-2 rounded bg-green-500 text-white font-bold mr-4" type="submit">
                     Buy
                 </button>
-                </form>
-    </div>
-<div>
-                <form action="/sell/crypto{{ respond.getSymbol }}" method="post">
-                    <label>
-                        <input type="text" name="sellAmount" placeholder="Enter amount">
-                    </label>
-                    <button class="px-4 py-2 rounded bg-red-500 text-white font-bold" type="submit">
-                        Sell
-                    </button>
-                </form>
-
-</div>
+            </form>
         </div>
-    </div>
-            {% endif %}
+        <div>
+            <form action="/sell/crypto{{ respond.getSymbol }}" method="post">
+                <label>
+                    <input type="text" name="sellAmount" placeholder="Enter amount">
+                </label>
+                <button class="px-4 py-2 rounded bg-red-500 text-white font-bold" type="submit">
+                    Sell
+                </button>
+            </form>
+
+        </div>
+        </div>
+        </div>
+    {% endif %}
 
 {% endfor %}
 

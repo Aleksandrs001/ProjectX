@@ -12,78 +12,83 @@
 <body>
 
 <div class="absolute top-20 left-0 right-1 ...">
-<div class="containers mx-auto px-7 relative" >
-    <ul class="absolute right-10 top-0 shadow-md">
+    <div class="containers mx-auto px-7 relative">
+        <ul class="absolute right-10 top-0 shadow-md">
 
             <p class="font-bold">Welcome {{ session.name }}</p> <br>
 
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                <a href="/" class="hover:bg-gray-700">Home</a>
+            </li>
 
-        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-            <a href="/history" class="hover:bg-gray-700">History</a>
-        </li>
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                <a href="/history" class="hover:bg-gray-700">History</a>
+            </li>
+
 
             <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
                 <a href="/coinTransfer" class="hover:bg-gray-700">Coin Transfer</a>
             </li>
 
-        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
                 <a href="/short" class="hover:bg-gray-700">Shorts</a>
             </li>
 
-        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-            <a href="/" class="hover:bg-gray-700">Home</a>
-        </li>
+
+            {% if not session.name %}
+                <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                    <a href="/login" class="hover:bg-gray-700">Log In</a>
+                </li>
+            {% endif %}
+
+            {% if not session.name %}
+                <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                    <a href="/registration" class="hover:bg-gray-700">Register</a>
+                </li>
+            {% endif %}
 
 
-        {% if not session.name %}
             <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-                <a href="/login" class="hover:bg-gray-700">Log In</a>
+                <a href="/logout" class="hover:bg-gray-700">Log Out</a>
             </li>
-        {% endif %}
-
-        {% if not session.name %}
-            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-                <a href="/registration" class="hover:bg-gray-700">Register</a>
-            </li>
-        {% endif %}
-
-
-        <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-            <a href="/logout" class="hover:bg-gray-700">Log Out</a>
-        </li>
-    </ul>
-</div>
-</div>
-</body>
-<body>
-<div class="absolute top-80 left-0 right-0 ...">
-<div class="flex items-center justify-center " >
-    <img src="../../{{ session.avatar }}" alt="no avatar uploaded" class="h-20 rounded-full mr-4 p-2 border-2 border-black" >
-    <div>
-        <h1 class="text-xl font-bold">
-            Account id: {{ session.id }} <br> Name: {{ session.name }} <br> Login: {{ session.login }} <br>
-            Email: {{ session.email }}
-        </h1>
+        </ul>
     </div>
 </div>
 
+</body>
+<body>
+<div class="absolute top-80 left-0 right-0 ...">
+    <div class="flex items-center justify-center ">
+        <img src="../../{{ session.avatar }}" alt="no avatar uploaded"
+             class="h-20 rounded-full mr-4 p-2 border-2 border-black">
+        <div>
+            <h1 class="text-xl font-bold">
+                Account id: {{ session.id }} <br> Name: {{ session.name }} <br> Login: {{ session.login }} <br>
+                Email: {{ session.email }}
+            </h1>
+        </div>
+    </div>
 
-<div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center ">
-    <h2 class="text-xl font-bold mb-4">Send Money to Wallet</h2>
-    <form action="/profile" method="post">
-        <label class="mb-4">
-            <input type="text" name="toMoneyBag" placeholder="Enter amount $" class="px-4 py-2 rounded-md bg-grey-200">
-        </label>
-        <button type="submit" class="px-4 py-2 rounded-md bg-grey-500 text-black font-bold">
-            <button type="submit" >Send to Wallet</button>
 
-        </button><br>
-        <span class="font-bold"> Total money in wallet: {{ items|number_format(2) }}$. </span>
-    </form>
-</div>
+    <div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center ">
+        <h2 class="text-xl font-bold mb-4">Send Money to Wallet</h2>
+        <form action="/profile" method="post">
+            <label class="mb-4">
+                <input type="text" name="toMoneyBag" placeholder="Enter amount $"
+                       class="px-4 py-2 rounded-md bg-grey-200">
+            </label>
+            <button type="submit" class="px-4 py-2 rounded-md bg-grey-500 text-black font-bold">
+                <button type="submit">Send to Wallet</button>
+
+            </button>
+            <br>
+            <span class="font-bold"> Total money in wallet: {{ items|number_format(2) }}$. </span>
+        </form>
+    </div>
     <div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center ">
         {{ session.message }}
-</div>
+    </div>
 </div>
 </body>
 </html>

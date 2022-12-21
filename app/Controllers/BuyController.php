@@ -13,7 +13,7 @@ class BuyController
     public function buyCryptoCurrency($userInfo): Redirect
     {
         $amount = new Post ((float) $_POST["buyAmount"]);
-        $buyService = new BuySellServiceRequest($amount->getPost(), $userInfo["symbol"]);
+        $buyService = new BuySellServiceRequest( $userInfo["symbol"],$amount->getPost());
         $startService=  new BuyService();
 
         return $startService->buyCrypto($buyService);

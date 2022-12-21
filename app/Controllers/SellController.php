@@ -12,7 +12,7 @@ class SellController
     public function sellCryptoCurrency($userInfo): Redirect
     {
         $amount = new Post ((float) $_POST["sellAmount"]);
-        $sellService = new BuySellServiceRequest($amount->getPost(), $userInfo["symbol"]);
+        $sellService = new BuySellServiceRequest( $userInfo["symbol"], $amount->getPost());
         $startService = new SellService();
 
         return $startService->sellCrypto($sellService);

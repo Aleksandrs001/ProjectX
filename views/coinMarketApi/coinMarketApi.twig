@@ -33,6 +33,13 @@
         </li>
         {% endif %}
 
+        {% if session.name %}
+            <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
+                <a href="/short" class="hover:bg-gray-700">Shorts</a>
+            </li>
+        {% endif %}
+
+
         {% if not session.name %}
             <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
                 <a href="/login" class="hover:bg-gray-700">Log In</a>
