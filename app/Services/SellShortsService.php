@@ -13,7 +13,7 @@ class SellShortsService
 
     public function __construct(
 
-        ShowCryptoCurrencyService $showCryptoCurrencyService
+        $showCryptoCurrencyService
     )
     {
 

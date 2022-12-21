@@ -19,7 +19,7 @@ class ProfileServiceRequest extends CryptoCurrenciesCollection
                                 ?string $coinPrice=null,
                                 ?string $date=null,
                                 ?string $moneyBag=null,
-        ?string $description=null
+                                ?string $description=null
 
 
     )

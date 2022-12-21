@@ -9,15 +9,19 @@
     <title>History</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-100">
 
 <div>
     <h4 class="welcome">MyCoinMarketCap</h4>
 </div>
     <div class="containers mx-auto px-7 relative" id="1">
-        <ul class="absolute right-10 top-0 shadow-md">
+        <ul class="absolute right-10 top shadow-md">
 
             <p class="font-bold">Welcome {{ session.name }}</p> <br>
+
+            {% if session.name %}
+                <p class="font-bold">Total money: {{ session.totalMoney|number_format(2) }}$</p> <br>
+            {% endif %}
 
             <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
                 <a href="/" class="hover:bg-gray-700">Home</a>
@@ -33,12 +37,13 @@
             </li>
         </ul>
     </div>
-
+</body>
+<body>
 <br><br>
-<div class="absolute top-80 left-0 right-0 ...">
+<div class="justify-center items-center">
     <div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center">
         <h2 class="text-xl font-bold mb-4">Transaction History</h2>
-        <table class="table-auto w-full">
+        <table class="table-auto mx-auto">
             <thead>
             <tr>
                 <th class="px-4 py-2">Coin Symbol</th>

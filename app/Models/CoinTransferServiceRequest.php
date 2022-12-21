@@ -11,7 +11,13 @@ class CoinTransferServiceRequest
     public float $amount;
     public string $currency;
 
-    public function __construct(string $login, string $email, string $password, int $recipient, float $amount, string $currency)
+    public function __construct(string $login,
+                                string $email,
+                                string $password,
+                                int $recipient,
+                                float $amount,
+                                string $currency
+    )
     {
         $this->login = $login;
         $this->email = $email;

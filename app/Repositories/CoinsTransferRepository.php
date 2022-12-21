@@ -11,8 +11,6 @@ use App\Models\Collections\CryptoCurrenciesCollection;
 
 class CoinsTransferRepository
 {
-    public array $userSymbols=[];
-
     public function showSymbolNameAndAmount(): CryptoCurrenciesCollection
     {
         $collection = new CryptoCurrenciesCollection();

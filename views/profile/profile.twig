@@ -20,6 +20,10 @@
 
             <p class="font-bold">Welcome {{ session.name }}</p> <br>
 
+            {% if session.name %}
+                <p class="font-bold">Total money: {{ session.totalMoney|number_format(2) }}$</p> <br>
+            {% endif %}
+
             <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
                 <a href="/" class="hover:bg-gray-700">Home</a>
             </li>
@@ -61,7 +65,6 @@
 
 </body>
 <body>
-<div class="absolute top-80 left-0 right-0 ...">
     <div class="flex items-center justify-center ">
         <img src="../../{{ session.avatar }}" alt="no avatar uploaded"
              class="h-20 rounded-full mr-4 p-2 border-2 border-black">
@@ -92,7 +95,6 @@
     <div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center ">
         {{ session.message }}
     </div>
-</div>
 </body>
 </html>
 

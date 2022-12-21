@@ -7,21 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../../public/styles.css">
     <title>MyCoinMarketCap</title>
-
     <script src="https://cdn.tailwindcss.com"></script>
-
-
 </head>
 <body>
-
-
 <div>
     <h4 class="welcome">MyCoinMarketCap</h4>
 </div>
-<div class="containers mx-auto px-7 relative" id="1">
+<div class="containers bg-gray-800 mx-auto px-7 relative" id="1">
     <ul class="absolute right-10 top-0 shadow-md">
         {% if session.name %}
             <p class="font-bold">Welcome {{ session.name }}</p> <br>
+        {% endif %}
+
+        {% if session.name %}
+            <p class="font-bold">Total money: {{ session.totalMoney|number_format(2) }}$</p> <br>
         {% endif %}
 
         <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
@@ -60,7 +59,7 @@
     </ul>
 </div>
 </body>
-<body>
+<body class="bg-gray-100">
 <form class="max-w-sm mx-auto mt-10 center mx-auto" method="get">
     <input class="form-input rounded-lg shadow-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
            type="text" name="symbols" value="" placeholder="Search">
@@ -70,42 +69,33 @@
 </form>
 
 {% for respond in response %}
+    <div class="container mx-auto px-4 mt-10">
+        <a href="/crypto{{ respond.getSymbol }}"  methods="get"
+           class="block rounded-lg bg-white hover:bg-gray-100 px-3 py-2 mb-4 text-gray-700 font-semi-bold shadow-lg">
+            <h2 class="text-2xl font-bold  text-center">{{ respond.getSymbol }}</h2>
+            <p class="text-lg text-center">{{ respond.getName }}</p>
 
-    <div>
-        <div class="container  m-14 mx-auto px-4">
+            <p class="text-2xl font-bold text-center">{{ respond.getPrice|number_format(3) }} $</p>
 
-            <a href="/crypto{{ respond.getSymbol }}"  methods="get"
-               class="block rounded bg-gray-200 hover:bg-gray-300 px-3 py-2 mb-4 text-gray-700 font-semi-bold">
-                <h2 class="text-xl font-bold">{{ respond.getSymbol }}</h2>
-                <p>{{ respond.getName }}</p>
+            {% if respond.getPercentChange1h < 0 %}
+                <p class="text-red-500 text-center" >{{ respond.getPercentChange1h|number_format(3) }}%</p>
+            {% else %}
+                <p class=" text-center">{{ respond.getPercentChange1h|number_format(3) }}%</p>
+            {% endif %}
 
-                <p class="text-xl font-bold">{{ respond.getPrice|number_format(3) }} $</p>
+            {% if responc.getPercentChange24h < 0 %}
+                <p class="text-red-500 text-center">{{ respond.getPercentChange24h|number_format(3) }}%</p>
+            {% else %}
+                <p class="text-red-500 text-center">{{ respond.getPercentChange24h|number_format(3) }}%</p>
+            {% endif %}
 
-                {% if respond.getPercentChange1h < 0 %}
-                    <p class="text-red-500">{{ respond.getPercentChange1h|number_format(3) }}%</p>
-                {% else %}
-                    <p>{{ respond.getPercentChange1h|number_format(3) }}%</p>
-                {% endif %}
-
-                {% if responc.getPercentChange24h < 0 %}
-                    <p class="text-red-500">{{ respond.getPercentChange24h|number_format(3) }}%</p>
-                {% else %}
-                    <p>{{ respond.getPercentChange24h|number_format(3) }}%</p>
-                {% endif %}
-
-                {% if respond.getPercentChange7d < 0 %}
-                    <p class="text-red-500">{{ respond.getPercentChange7d|number_format(3) }}%</p>
-                {% else %}
-                    <p>{{ respond.getPercentChange7d|number_format(3) }}%</p>
-                {% endif %}
-            </a>
-
-        </div>
+            {% if respond.getPercentChange7d < 0 %}
+                <p class="text-red-500 text-center">{{ respond.getPercentChange7d|number_format(3) }}%</p>
+            {% else %}
+                <p class=" text-center">{{ respond.getPercentChange7d|number_format(3) }}%</p>
+            {% endif %}
+        </a>
     </div>
-
 {% endfor %}
-
-
 </body>
 
-</html>

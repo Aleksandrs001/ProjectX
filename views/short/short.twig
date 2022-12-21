@@ -8,12 +8,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Buy/Sell shorts</title>
 </head>
-<body>
+<body class="bg-gray-100">
 
 <div class="containers mx-auto px-7 relative" id="1">
     <ul class="absolute right-10 top-0 shadow-md">
         {% if session.name %}
             <p class="font-bold">Welcome {{ session.name }}</p> <br>
+        {% endif %}
+
+        {% if session.name %}
+            <p class="font-bold">Total money: {{ session.totalMoney|number_format(2) }}$</p> <br>
         {% endif %}
 
         <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
@@ -100,6 +104,7 @@
                     {% endfor %}
                 </select><br>
 
+
                 <div class="mb-4">
 
                     <div class="mb-4"><br>
@@ -120,9 +125,12 @@
             </div>
         </div>
     </form>
-
+</body>
+{% if session.message %}
+<body class="bg-gray-100">
     <div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center ">
         {{ session.message }}
     </div>
 </body>
+{% endif %}
 </html>

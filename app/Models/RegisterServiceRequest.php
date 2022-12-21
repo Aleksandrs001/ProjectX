@@ -9,14 +9,14 @@ class RegisterServiceRequest
     public string $password;
     public string $login;
     public array $avatar;
-    public ?string $repeatPassword;
+    public string $repeatPassword;
 
     public function __construct(string $name,
                                 string $login,
                                 string $email,
                                 string $password,
                                 array $avatar,
-    ?string $repeatPassword
+                                string $repeatPassword
     )
     {
         $this->name = $name;
@@ -57,7 +57,7 @@ class RegisterServiceRequest
         return $path;
     }
 
-    public function getRepeatPassword(): ?string
+    public function getRepeatPassword(): string
     {
         return $this->repeatPassword;
     }

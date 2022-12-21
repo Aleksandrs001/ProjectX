@@ -19,6 +19,7 @@ class ProfileRepository
         foreach ($userDBmoney as $item) {
             $totalMoneyInAccount += (float)$item["money_bag"];
         }
+            Session::put("totalMoney", $totalMoneyInAccount);
         return $totalMoneyInAccount;
     }
     public function moneyTransfer($moneyToBag): Redirect

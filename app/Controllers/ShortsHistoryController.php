@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Template;
 use App\Services\ShortsService;
 use App\Services\CryptoCurrency\ShowCryptoCurrencyService;
-use App\Services\CryptoCurrency\ListCryptoCurrenciesService;
 
 class ShortsHistoryController
 {
@@ -28,5 +27,4 @@ class ShortsHistoryController
             ]
         );
     }
-
 }

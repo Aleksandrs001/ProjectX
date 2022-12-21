@@ -23,10 +23,8 @@ class ShortsRepository
         ShowCryptoCurrencyService $showCryptoCurrencyService
     )
     {
-
         $this->showCryptoCurrencyService = $showCryptoCurrencyService;
     }
-
 
     public function showAccInfo(): CryptoCurrenciesCollection
     {
@@ -136,15 +134,26 @@ class ShortsRepository
                 "buy",
                 Session::getData("id"),
                 Carbon::now()
-            ]
-        );
+            ]);
+             DatabaseRepository::getConnection()->executeQuery('INSERT INTO crypto.users_crypto_profiles SET money_bag = ?, user_id = ?, coin_symbol = ?, coin_amount = ?, coin_price = ?,date = ?,description = ?',
+                 [
+
+                     "-" . $getCoinInfo->getPrice()*$fromPost->getAmount(),
+                     Session::getData("id"),
+                     $fromPost->getSymbol(),
+                     (float)"+" . $fromPost->getAmount(),
+                     $fromPost->getAmount(),
+                     Carbon::now(),
+                     "Rented in shorts"
+                 ]);
+
+
         Session::put("message", "Congrats! successfully rented" ." ". $fromPost->getAmount() . " " . $fromPost->getSymbol() . " " . $getCoinInfo->getPrice() . "$");
         return new Redirect("/short");
     }
 
     public function sellShorts($fromPost): Redirect
     {
-
 
         $getCoinInfo =$this->showCryptoCurrencyService->execute($fromPost->getSymbol());
         $getCoinInfo = new PriceRequest( $getCoinInfo->getPrice());

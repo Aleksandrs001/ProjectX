@@ -12,10 +12,7 @@ class ShortsService
 
     private ShowCryptoCurrencyService $showCryptoCurrencyService;
 
-    public function __construct(
-
-        ShowCryptoCurrencyService $showCryptoCurrencyService
-    )
+    public function __construct($showCryptoCurrencyService)
     {
 
         $this->showCryptoCurrencyService = $showCryptoCurrencyService;

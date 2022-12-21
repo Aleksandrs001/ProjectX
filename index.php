@@ -62,6 +62,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
 
 $loader = new FilesystemLoader('views');
 $twig = new Environment($loader);
+
 $twig->addGlobal("session", $_SESSION);
 
 

@@ -24,6 +24,7 @@ class CryptoCurrencyController
     public function index(): Template
     {
 
+//        var_dump($_GET["symbols"] );die;
 
         $cryptoCurrencies = $this->listCryptoCurrenciesService->execute(
             explode(",", $_GET["symbols"] ?? "BTC,ETH,LTC,DOGE,XRP,BCH,USDT,BSV,BNB,ADA"
