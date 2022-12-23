@@ -44,7 +44,6 @@ class ShortsRepository
             $userCoins[$symbols["coin_symbol_shorts"]][] = $symbols["coin_price_shorts"];
         }
 
-        $userSymbols = [];
         foreach ($userCoinsSymbolsInDB as $key => $value) {
 
             if (array_sum($value) > 0) $collection->add(new PipeRequest( $key, array_sum($value))); //sum of coins

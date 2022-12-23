@@ -50,7 +50,7 @@ class HistoryRepository
             $userTransaction[$user["coin_symbol"]][] = $user["transaction"];
         }
         foreach ($symbol as $key => $value) {
-            if ($key == !null) $showSymbolAmountAndPrice->add(new Pipe3Request($key, abs(array_sum($userTransaction[$key])), array_sum($userAmount[$key])));
+            if ($key == !null ) $showSymbolAmountAndPrice->add(new Pipe3Request($key, abs(array_sum($userTransaction[$key])), array_sum($userAmount[$key])));
         }
         return $showSymbolAmountAndPrice;
     }
