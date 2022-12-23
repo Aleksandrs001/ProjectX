@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Repositories;
 
@@ -19,13 +19,12 @@ class ShortsRepository
     private ShowCryptoCurrencyService $showCryptoCurrencyService;
 
     public function __construct(
-
-        ShowCryptoCurrencyService $showCryptoCurrencyService
+        $showCryptoCurrencyService
     )
     {
         $this->showCryptoCurrencyService = $showCryptoCurrencyService;
     }
-
+///////////////////////////////////////////////
     public function showAccInfo(): CryptoCurrenciesCollection
     {
 
@@ -53,33 +52,7 @@ class ShortsRepository
 
         return $collection;
     }
-
-    public function getAveragePrice()
-    {
-        $resultSet = DatabaseRepository::getConnection()->executeQuery(
-
-            'select coin_symbol_shorts, coin_amount_shorts, coin_price_shorts  from shorts where user_id_shorts = ?',
-            [
-                Session::getData("id")
-            ]
-        );
-        $users = $resultSet->fetchAllAssociative();
-
-        $userPrice = [];
-        foreach ($users as $symbols) {
-
-            $userPrice[$symbols["coin_symbol_shorts"]][] = $symbols["coin_price_shorts"];
-        }
-
-        $userPriceRequest = [];
-        foreach ($userPrice as $key => $value) {
-            if (array_sum($value) < 0) $userPriceRequest[$key] = array_sum($value) / count($value);//average buy price
-        }
-        $cc = new Pipe2Request($userPriceRequest);
-
-        return $cc->getUserPriceRequest();
-    }
-
+///////////////////////////////////////////////
     public function also()
     {
         $resultSet = DatabaseRepository::getConnection()->executeQuery('select
@@ -92,6 +65,8 @@ class ShortsRepository
         foreach ($userDBmoney as $item) {
             $totalMoneyInAccount += (float)$item["coin_price_shorts"];
         }
+        return $totalMoneyInAccount;
+
     }
 
     public function showHistory(): CryptoCurrenciesCollection
@@ -110,13 +85,12 @@ class ShortsRepository
                 $user["description_shorts"]
             ));
         }
-
         return $collection;
     }
-    public function buyShorts(BuySellServiceRequest $fromPost): Redirect
-    {
 
-        $getCoinInfo = $this->showCryptoCurrencyService->execute($fromPost->getSymbol());
+    public function buyShorts(BuySellServiceRequest $postUserData): Redirect
+    {
+        $getCoinInfo = $this->showCryptoCurrencyService->execute($postUserData->getSymbol());
         $getCoinInfo = new PriceRequest( $getCoinInfo->getPrice());
 
         DatabaseRepository::getConnection()->executeQuery(
@@ -126,36 +100,33 @@ class ShortsRepository
                                       coin_price_shorts = ?,
                                       description_shorts = ?,
                                       user_id_shorts = ?,
-                                      date_shorts = ?',
+                                      date_shorts = ?,
+                                      sum_of_shorts=?',
             [
-                $fromPost->getSymbol(),
-                (float)"+" . $fromPost->getAmount(),
-                "-" . $getCoinInfo->getPrice(),
+                $postUserData->getSymbol(),
+                +$postUserData->getAmount(),
+                $getCoinInfo->getPrice(),
                 "buy",
                 Session::getData("id"),
-                Carbon::now()
+                Carbon::now(),
+                "-".$getCoinInfo->getPrice()*$postUserData->getAmount()
             ]);
-             DatabaseRepository::getConnection()->executeQuery('INSERT INTO crypto.users_crypto_profiles SET money_bag = ?, user_id = ?, coin_symbol = ?, coin_amount = ?, coin_price = ?,date = ?,description = ?',
+             DatabaseRepository::getConnection()->executeQuery('INSERT INTO users_crypto_profiles SET money_bag = ?, user_id = ?, coin_symbol = ?,date = ?,description = ?',
                  [
-
-                     "-" . $getCoinInfo->getPrice()*$fromPost->getAmount(),
+                     -$getCoinInfo->getPrice()*$postUserData->getAmount(),
                      Session::getData("id"),
-                     $fromPost->getSymbol(),
-                     (float)"+" . $fromPost->getAmount(),
-                     $fromPost->getAmount(),
+                     $postUserData->getSymbol(),
                      Carbon::now(),
-                     "Rented in shorts"
+                     "Rented in shorts {$postUserData->getSymbol()}, {$postUserData->getAmount()} coin/s"
                  ]);
 
-
-        Session::put("message", "Congrats! successfully rented" ." ". $fromPost->getAmount() . " " . $fromPost->getSymbol() . " " . $getCoinInfo->getPrice() . "$");
-        return new Redirect("/short");
+        Session::put("message", "Congrats! successfully rented Shorts" ." ". $postUserData->getAmount() . " " . $postUserData->getSymbol() . " " . $getCoinInfo->getPrice() . "$");
+        return new Redirect("/shorts");
     }
 
-    public function sellShorts($fromPost): Redirect
+    public function sellShorts($postUserData): Redirect
     {
-
-        $getCoinInfo =$this->showCryptoCurrencyService->execute($fromPost->getSymbol());
+        $getCoinInfo =$this->showCryptoCurrencyService->execute($postUserData->getSymbol());
         $getCoinInfo = new PriceRequest( $getCoinInfo->getPrice());
         DatabaseRepository::getConnection()->executeQuery(
             'INSERT INTO shorts SET
@@ -164,18 +135,30 @@ class ShortsRepository
                                       coin_price_shorts = ?,
                                       description_shorts = ?,
                                       user_id_shorts = ?,
-                                      date_shorts = ?',
+                                      date_shorts = ?,
+                                      sum_of_shorts=?',
             [
-                $fromPost->getSymbol(),
-                -$fromPost->getAmount(),
-                +$getCoinInfo->getPrice(),
+                $postUserData->getSymbol(),
+                -$postUserData->getAmount(),
+                $getCoinInfo->getPrice(),
                 "sell",
                 Session::getData("id"),
-                Carbon::now()
+                Carbon::now(),
+                "+".$getCoinInfo->getPrice()*$postUserData->getAmount()
             ]
         );
+        DatabaseRepository::getConnection()->executeQuery('INSERT INTO users_crypto_profiles SET money_bag = ?, user_id = ?, coin_symbol = ?,date = ?,description = ?',
+            [
+                "+".$getCoinInfo->getPrice()*$postUserData->getAmount(),
+                Session::getData("id"),
+                $postUserData->getSymbol(),
+                Carbon::now(),
+                "Sold in shorts {$postUserData->getSymbol()}, {$postUserData->getAmount()} coin/s"
+            ]);
 
-        Session::put("message", "Congrats! successfully Sold rented" ." ". $fromPost->getAmount() . " " . $fromPost->getSymbol() . " " . $getCoinInfo->getPrice() . "$");
-        return new Redirect("/short");
+
+
+        Session::put("message", "Congrats! successfully Sold rented Shorts" ." ". $postUserData->getAmount() . " " . $postUserData->getSymbol() . " " .round($getCoinInfo->getPrice(), 3)  . "$");
+        return new Redirect("/shorts");
     }
 }

@@ -16,7 +16,6 @@ class SellController
     {
         $this->showCryptoCurrencyService = $showCryptoCurrencyService;
 
-
     }
     public function sellCryptoCurrency($userInfo): Redirect
     {

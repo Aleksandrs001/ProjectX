@@ -24,13 +24,15 @@ class BuySellCryptoCurrencyRepository
                                       coin_amount = ?,
                                       coin_price=?,
                                       date= ?,
-                                      money_bag = ?',
+                                      money_bag = ?,
+                                      transaction=?',
                     [
                         Session::getData("id"),
                         $symbol,
                         "+" . $amount,
                         $price,
                         date("Y-m-d H:i:s"),
+                        "-" . $price * $amount,
                         "-" . $price * $amount
                     ]
                 );
@@ -64,13 +66,15 @@ class BuySellCryptoCurrencyRepository
                                       coin_amount = ?,
                                       coin_price=?,
                                       date = ?,
-                                      money_bag = ?',
+                                      money_bag = ?,
+                                      transaction=?',
                 [
                     Session::getData("id"),
                     $symbol,
                     "-" . $amount,
                     $price,
                     date("Y-m-d H:i:s"),
+                    "+" . $price * $amount,
                     "+" . $price * $amount
                 ]
             );

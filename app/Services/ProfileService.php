@@ -9,14 +9,13 @@ class ProfileService
 {
     public function startMoneyCheckTransfer(float $putIntoDB): Redirect
     {
-        $start= new ProfileRepository();
-      return $start->moneyTransfer($putIntoDB);
+        $start = new ProfileRepository();
+        return $start->moneyTransfer($putIntoDB);
     }
 
-    public function sumInWallet():float
+    public function sumInWallet(): float
     {
-        $start= new ProfileRepository();
-        $start->showTotalInMoneyBag();
+        $start = new ProfileRepository();
         return $start->showTotalInMoneyBag();
     }
 }

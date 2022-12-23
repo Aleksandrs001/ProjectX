@@ -21,7 +21,7 @@
             <p class="font-bold">Welcome {{ session.name }}</p> <br>
 
             {% if session.name %}
-                <p class="font-bold">Total money: {{ session.totalMoney|number_format(2) }}$</p> <br>
+                <p class="font-bold">Total money: {{ items|number_format(2) }}$</p> <br>
             {% endif %}
 
             <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
@@ -39,7 +39,7 @@
 
 
             <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-                <a href="/short" class="hover:bg-gray-700">Shorts</a>
+                <a href="/shorts" class="hover:bg-gray-700">Shorts</a>
             </li>
 
 

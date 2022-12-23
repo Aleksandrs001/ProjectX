@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Services\ProfileService;
+use App\Session;
 use App\Template;
 use App\Services\CryptoCurrency\ShowCryptoCurrencyService;
 use App\Services\CryptoCurrency\ListCryptoCurrenciesService;
@@ -11,15 +12,20 @@ class CryptoCurrencyController
 {
     private ListCryptoCurrenciesService $listCryptoCurrenciesService;
     private ShowCryptoCurrencyService $showCryptoCurrencyService;
+    private ProfileService $profileService;
+    private HistoryController $historyController;
 
     public function __construct(
         ListCryptoCurrenciesService $listCryptoCurrenciesService,
-        ShowCryptoCurrencyService $showCryptoCurrencyService
+        ShowCryptoCurrencyService $showCryptoCurrencyService,
+        ProfileService $profileService,
+        HistoryController $historyController
     )
     {
         $this->listCryptoCurrenciesService = $listCryptoCurrenciesService;
-          $this->showCryptoCurrencyService = $showCryptoCurrencyService;
-
+        $this->showCryptoCurrencyService = $showCryptoCurrencyService;
+        $this->profileService = $profileService;
+        $this->historyController = $historyController;
     }
 
     public function index(): Template
@@ -28,10 +34,8 @@ class CryptoCurrencyController
             explode(",", $_GET["symbols"] ?? "BTC,ETH,LTC,DOGE,XRP,BCH,USDT,BSV,BNB,ADA"
             )
         );
-        $totalMoneyInAccount = new profileService();
-        $totalMoneyInAccount = $totalMoneyInAccount->sumInWallet();
         return new Template("coinMarketApi/coinMarketApi.twig", [
-            "items"=>$totalMoneyInAccount,
+            "items"=>$this->profileService->sumInWallet(),
             'response' => $cryptoCurrencies->all()
         ]);
     }
@@ -41,11 +45,10 @@ class CryptoCurrencyController
         $cryptoCurrency = $this->showCryptoCurrencyService->execute(
              $vars["symbol"]
         );
-        $totalMoneyInAccount = new profileService();
-        $totalMoneyInAccount = $totalMoneyInAccount->sumInWallet();
         return new Template("readyToBuy/readyToBuy.twig", [
-            "items"=>$totalMoneyInAccount,
-            'response' => [$cryptoCurrency]
+            "items"=>$this->profileService->sumInWallet(),
+            "response" => [$cryptoCurrency],
+            "showSymbolAmountAndPrice"=> $this->historyController->showSymbolAmountAndPrice()->all()
         ]);
     }
 }

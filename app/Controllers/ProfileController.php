@@ -9,14 +9,21 @@ use App\Services\ProfileService;
 
 class ProfileController
 {
+    public ProfileService $profileService;
+
+
+    public function __construct(ProfileService $profileService)
+    {
+        $this->profileService = $profileService;
+    }
+
 
     public function showForm(): Template
     {
         $totalMoneyInAccount = new profileService();
-        $totalMoneyInAccount = $totalMoneyInAccount->sumInWallet();
         return new Template("profile/profile.twig",
             [
-                "items"=>$totalMoneyInAccount,
+                "items"=>$this->profileService->sumInWallet(),
             ]
         );
     }
@@ -24,7 +31,6 @@ class ProfileController
     public function walletStatus(): Redirect
     {
         $putIntoDB = new Post ((float) $_POST["toMoneyBag"]);
-        $start= new ProfileService();
-        return $start->startMoneyCheckTransfer($putIntoDB->getPost());
+        return $this->profileService->startMoneyCheckTransfer($putIntoDB->getPost());
     }
 }

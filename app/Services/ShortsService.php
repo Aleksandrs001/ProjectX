@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Services;
 
@@ -17,7 +17,6 @@ class ShortsService
 
         $this->showCryptoCurrencyService = $showCryptoCurrencyService;
     }
-
 
     public function showAccInfo(): CryptoCurrenciesCollection
     {

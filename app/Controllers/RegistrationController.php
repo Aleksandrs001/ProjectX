@@ -17,7 +17,6 @@ class RegistrationController
 
     public function store(): Redirect
     {
-
         $registerService = new RegistrationService();
 
         return $registerService->execute(

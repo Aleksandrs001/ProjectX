@@ -10,17 +10,19 @@ class ProfileRepository
 {
     public function showTotalInMoneyBag(): float
     {
-        $resultSet = DatabaseRepository::getConnection()->executeQuery(
-            'select date,money_bag from users_crypto_profiles where user_id = ?', [ Session::getData("id")]);
 
-        $userDBmoney = $resultSet->fetchAllAssociative();
-        $totalMoneyInAccount = 0;
+            $resultSet = DatabaseRepository::getConnection()->executeQuery(
+                'select date,money_bag from users_crypto_profiles where user_id = ?', [Session::getData("id")]);
 
-        foreach ($userDBmoney as $item) {
-            $totalMoneyInAccount += (float)$item["money_bag"];
+            $userDBmoney = $resultSet->fetchAllAssociative();
+            $totalMoneyInAccount = 0;
+
+            foreach ($userDBmoney as $item) {
+                $totalMoneyInAccount += (float)$item["money_bag"];
+            }
+            return $totalMoneyInAccount;
         }
-        return $totalMoneyInAccount;
-    }
+
     public function moneyTransfer($moneyToBag): Redirect
     {
         if ($moneyToBag <= 0) {

@@ -125,10 +125,14 @@
             </div>
         </div>
     </div>
+</form>
+    {% if session.message %}
+    <body class="bg-gray-100">
     <div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center ">
         {{ session.message }}
     </div>
-</form>
+    </body>
+    {% endif %}
 
 
 </body>

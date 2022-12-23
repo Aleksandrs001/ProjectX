@@ -5,7 +5,6 @@ namespace App\Repositories;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 
-
 class DatabaseRepository
 {
     private static ?Connection $connection = null;

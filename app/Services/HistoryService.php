@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace App\Services;
 
 use App\Repositories\HistoryRepository;
@@ -9,7 +9,12 @@ class HistoryService
     public function showHistory(): CryptoCurrenciesCollection
     {
         $history = new HistoryRepository();
-
         return $history->showAllTransactions();
+    }
+
+    public function showSymbolAmountAndPrice(): CryptoCurrenciesCollection
+    {
+        $history = new HistoryRepository();
+        return $history->showSymbolAmountAndPrice();
     }
 }

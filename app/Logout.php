@@ -14,6 +14,7 @@ class Logout
         unset($_SESSION["email"]);
         unset($_SESSION["avatar"]);
         unset($_SESSION["greetings"]);
+        if (!isset($_SESSION["id"]))Session::put("id", "1");
         return new Redirect("/");
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models;
 
@@ -21,7 +21,7 @@ class CoinTransferServiceRequest
     {
         $this->login = $login;
         $this->email = $email;
-        $this->password = $password;
+        $this->password = md5($password);
         $this->recipient = $recipient;
         $this->amount = $amount;
         $this->currency = $currency;

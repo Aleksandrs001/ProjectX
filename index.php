@@ -35,20 +35,18 @@ $container->set( CryptoCurrenciesRepository::class,
     \DI\create(CoinMarketCapCryptoCurrencyRepository::class)
 );
 
-
-
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $route) {
     $route->addRoute("GET", "/", [CryptoCurrencyController::class, "index"]);
     $route->addRoute("GET", "/crypto{symbol}", [CryptoCurrencyController::class, "showForm"]);
     $route->addRoute("POST", "/buy/crypto{symbol}", [BuyController::class, "buyCryptoCurrency"]);
     $route->addRoute("POST", "/sell/crypto{symbol}", [SellController::class, "sellCryptoCurrency"]);
     $route->addRoute("GET", "/coinTransfer", [CoinTransferController::class, "transfer"]);
-    $route->addRoute("POST", "/coinTransfer", [CoinTransferController::class, "transferMoney"]);
+    $route->addRoute("POST", "/coinTransfer", [CoinTransferController::class, "transferCoins"]);
     $route->addRoute("GET", "/registration", [RegistrationController::class, "showForm"]);
-    $route->addRoute("GET", "/short", [ShortsController::class, "showForm"]);
+    $route->addRoute("GET", "/shorts", [ShortsController::class, "showForm"]);
     $route->addRoute("GET", "/shortsHistory", [ShortsHistoryController::class, "showForm"]);
-    $route->addRoute("POST", "/buyShort", [BuyShortsController::class, "buyShorts"]);
-    $route->addRoute("POST", "/sellShort", [SellShortsController::class, "sellShorts"]);
+    $route->addRoute("POST", "/buyShorts", [BuyShortsController::class, "buyShorts"]);
+    $route->addRoute("POST", "/sellShorts", [SellShortsController::class, "sellShorts"]);
     $route->addRoute("POST", "/registration", [RegistrationController::class, "store"]);
     $route->addRoute("GET", "/login", [LoginController::class, "showForm"]);
     $route->addRoute("POST", "/login", [LoginController::class, "enter"]);

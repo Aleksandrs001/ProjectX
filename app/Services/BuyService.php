@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Redirect;
 use App\Repositories\BuySellCryptoCurrencyRepository;
-use App\Services\CryptoCurrency\ListCryptoCurrenciesService;
 use App\Services\CryptoCurrency\ShowCryptoCurrencyService;
 
 class BuyService

@@ -48,7 +48,7 @@
 
             {% if session.name %}
                 <li class="block px-3 py-2 mb-4 font-bold text-sm text-white bg-gray-800 rounded-lg">
-                    <a href="/short" class="hover:bg-gray-700">Shorts</a>
+                    <a href="/shorts" class="hover:bg-gray-700">Shorts</a>
                 </li>
             {% endif %}
 
@@ -131,6 +131,29 @@
 
 
 <p class="text-center font-bold">{{ session.message }}</p>
+<div class="justify-center items-center">
+<div class="bg-white px-8 py-6 rounded-lg shadow-lg text-center">
+    <h2 class="text-xl font-bold mb-4">You have</h2>
+    <table class="table-auto mx-auto">
+        <thead>
+        <tr>
+            <th class="px-4 py-2">Coin Symbol</th>
+            <th class="px-4 py-2">Coin Amount</th>
+            <th class="px-4 py-2">Price For Sell</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in showSymbolAmountAndPrice %}
+            <tr>
+                <td class="border px-4 py-2">{{ user.symbol }}</td>
+                <td class="border px-4 py-2">{{ user.amount}}</td>
+                <td class="border px-4 py-2"> {{ user.summ|number_format(3) }}$</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
 
 
 </body>

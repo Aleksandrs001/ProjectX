@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controllers;
 
@@ -20,8 +20,8 @@ class BuyShortsController
     }
     public function buyShorts(): Redirect
     {
-        $toRequest = new BuySellServiceRequest($_POST["currency"], $_POST["amount"]);
+        $postUserData = new BuySellServiceRequest((string)$_POST["currency"], (float)$_POST["amount"]);
         $start = new BuyShortsService($this->showCryptoCurrencyService);
-        return $start->startBuy($toRequest);
+        return $start->startBuy($postUserData);
     }
 }

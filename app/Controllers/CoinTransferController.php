@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controllers;
 
@@ -10,32 +10,36 @@ use App\Models\CoinTransferServiceRequest;
 class CoinTransferController
 {
     public array $start;
+    private ProfileService $profileService;
+
+    public function __construct(
+        ProfileService $profileService
+    )
+    {
+        $this->profileService = $profileService;
+    }
 
     public function transfer(): Template
     {
-        $totalMoneyInAccount = new profileService();
-        $totalMoneyInAccount = $totalMoneyInAccount->sumInWallet();
         $start = new CoinTransferService();
-        $this->start = $start->showUserAccinfo()->all();
         return new Template("coinTransfer/transfer.twig", [
-            "start" => $this->start,
-                "items"=>$totalMoneyInAccount
-
+            "start" => $start->showUserAccinfo()->all(),
+                "items"=>$this->profileService->sumInWallet(),
         ]
         );
     }
 
-    public function transferMoney(): object
+    public function transferCoins(): object
     {
-        $postDatas = new CoinTransferServiceRequest(
-            $login =(string) $_POST["login"],
-            $email =(string) $_POST["email"],
-            $password =md5((string) $_POST["password"]),
-            $recipient =(int) $_POST["recipient"],
-            $amount =(float) $_POST["amount"],
-            $currency =(string) $_POST["currency"]
+        $postUserForm = new CoinTransferServiceRequest(
+            (string) $_POST["login"],
+            (string) $_POST["email"],
+            (string) $_POST["password"],
+            (int) $_POST["recipient"],
+            (float) $_POST["amount"],
+            (string) $_POST["currency"]
         );
         $start = new CoinTransferService();
-        return $start->transfer($postDatas);
+        return $start->transfer($postUserForm);
     }
 }
