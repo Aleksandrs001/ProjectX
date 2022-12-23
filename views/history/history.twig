@@ -60,7 +60,7 @@
                     <td class="border px-4 py-2">{{ user.getCoinSymbol }}</td>
                     <td class="border px-4 py-2 {% if user.getCoinAmount < 0 %}text-red-700{% else %}text-green-700{% endif %}">{{ user.getCoinAmount }}</td>
                     <td class="border px-4 py-2 {% if user.getMoneyBag < 0 %}text-red-700{% else %}text-green-700{% endif %}">{{ user.getmoneybag|number_format(2) }}</td>
-                    <td class="border px-4 py-2"> {{ user.getCoinPrice }}</td>
+                    <td class="border px-4 py-2"> {{ user.getCoinPrice|number_format(3) }}</td>
                     <td class="border px-4 py-2">{{ user.getDate }}</td>
                     <td class="border px-4 py-2">{{ user.getDescription }}</td>
                 </tr>

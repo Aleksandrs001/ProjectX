@@ -24,7 +24,7 @@ class ShortsRepository
     {
         $this->showCryptoCurrencyService = $showCryptoCurrencyService;
     }
-///////////////////////////////////////////////
+
     public function showAccInfo(): CryptoCurrenciesCollection
     {
 
@@ -52,7 +52,7 @@ class ShortsRepository
 
         return $collection;
     }
-///////////////////////////////////////////////
+
     public function also()
     {
         $resultSet = DatabaseRepository::getConnection()->executeQuery('select
@@ -155,8 +155,6 @@ class ShortsRepository
                 Carbon::now(),
                 "Sold in shorts {$postUserData->getSymbol()}, {$postUserData->getAmount()} coin/s"
             ]);
-
-
 
         Session::put("message", "Congrats! successfully Sold rented Shorts" ." ". $postUserData->getAmount() . " " . $postUserData->getSymbol() . " " .round($getCoinInfo->getPrice(), 3)  . "$");
         return new Redirect("/shorts");
