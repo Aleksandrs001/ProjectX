@@ -27,3 +27,6 @@
 3. Import the databse.sql
 `mysql -u myuser -p mydatabase < database.sql`
 5. Configure .env_example and rename the file to .env
+
+## Preview
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/113251847/209560171-9d69fdeb-6c29-4e6a-a18d-b7123a615ce2.gif)
