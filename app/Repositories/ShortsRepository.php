@@ -46,9 +46,8 @@ class ShortsRepository
 
         foreach ($userCoinsSymbolsInDB as $key => $value) {
 
-            if (array_sum($value) > 0) $collection->add(new PipeRequest( $key, array_sum($value))); //sum of coins
+            if (array_sum($value) < 0) $collection->add(new PipeRequest( $key, array_sum($value))); //sum of coins
         }
-
         return $collection;
     }
 
@@ -103,23 +102,23 @@ class ShortsRepository
                                       sum_of_shorts=?',
             [
                 $postUserData->getSymbol(),
-                +$postUserData->getAmount(),
+                -$postUserData->getAmount(),
                 $getCoinInfo->getPrice(),
-                "buy",
+                "open",
                 Session::getData("id"),
                 Carbon::now(),
-                "-".$getCoinInfo->getPrice()*$postUserData->getAmount()
+                "+".$getCoinInfo->getPrice()*$postUserData->getAmount()
             ]);
              DatabaseRepository::getConnection()->executeQuery('INSERT INTO users_crypto_profiles SET money_bag = ?, user_id = ?, coin_symbol = ?,date = ?,description = ?',
                  [
-                     -$getCoinInfo->getPrice()*$postUserData->getAmount(),
+                     +$getCoinInfo->getPrice()*$postUserData->getAmount(),
                      Session::getData("id"),
                      $postUserData->getSymbol(),
                      Carbon::now(),
-                     "Rented in shorts {$postUserData->getSymbol()}, {$postUserData->getAmount()} coin/s"
+                     "Open short/s {$postUserData->getSymbol()}, {$postUserData->getAmount()} coin/s"
                  ]);
 
-        Session::put("message", "Congrats! successfully rented Shorts" ." ". $postUserData->getAmount() . " " . $postUserData->getSymbol() . " " . $getCoinInfo->getPrice() . "$");
+        Session::put("message", "Congrats! successfully Open Short/s" ." ". $postUserData->getAmount() . " " . $postUserData->getSymbol() . " " . round($getCoinInfo->getPrice(),3) . "$");
         return new Redirect("/shorts");
     }
 
@@ -138,24 +137,24 @@ class ShortsRepository
                                       sum_of_shorts=?',
             [
                 $postUserData->getSymbol(),
-                -$postUserData->getAmount(),
+                +$postUserData->getAmount(),
                 $getCoinInfo->getPrice(),
-                "sell",
+                "close",
                 Session::getData("id"),
                 Carbon::now(),
-                "+".$getCoinInfo->getPrice()*$postUserData->getAmount()
+                "-".$getCoinInfo->getPrice()*$postUserData->getAmount()
             ]
         );
         DatabaseRepository::getConnection()->executeQuery('INSERT INTO users_crypto_profiles SET money_bag = ?, user_id = ?, coin_symbol = ?,date = ?,description = ?',
             [
-                "+".$getCoinInfo->getPrice()*$postUserData->getAmount(),
+                "-".$getCoinInfo->getPrice()*$postUserData->getAmount(),
                 Session::getData("id"),
                 $postUserData->getSymbol(),
                 Carbon::now(),
-                "Sold in shorts {$postUserData->getSymbol()}, {$postUserData->getAmount()} coin/s"
+                "Closed short/s {$postUserData->getSymbol()}, {$postUserData->getAmount()} coin/s"
             ]);
 
-        Session::put("message", "Congrats! successfully Sold rented Shorts" ." ". $postUserData->getAmount() . " " . $postUserData->getSymbol() . " " .round($getCoinInfo->getPrice(), 3)  . "$");
+        Session::put("message", "Congrats! successfully Closed rented Shorts" ." ". $postUserData->getAmount() . " " . $postUserData->getSymbol() . " " .round($getCoinInfo->getPrice(), 3)  . "$");
         return new Redirect("/shorts");
     }
 }

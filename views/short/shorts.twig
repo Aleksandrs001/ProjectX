@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Buy/Sell shorts</title>
+    <title>Open/Close shorts</title>
 </head>
 <body class="bg-gray-100">
 
@@ -58,7 +58,7 @@
         <div class="px-6 py-4">
             <div class="mb-4"><br>
                 <label class=" font-bold text-xl mb-2"
-                       for="currency">Buy shorts:</label><br>
+                       for="currency">Open shorts:</label><br>
             </div>
                 <select class="block text-gray-700 text-sm font-bold mb-2" id="currency" name="currency">
                     {% for respond in start %}
@@ -80,7 +80,7 @@
                         ><br>
 
                             <button class=" bg-blue-500 hover:bg-blue-700 rounded-lg shadow-lg py-2 px-3 text-white font-bold mt-3 focus:outline-none focus:shadow-outline"
-                                    type="submit">Buy
+                                    type="submit">Open
                             </button>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
             <div class="px-6 py-4">
                 <div class="mb-4"><br>
                     <label class=" font-bold text-xl mb-2"
-                           for="currency">Sell shorts:</label><br>
+                           for="currency">Close shorts:</label><br>
                 </div>
 
                 <select class="block text-gray-700 text-sm font-bold mb-2" id="currency" name="currency">
@@ -118,7 +118,7 @@
                         ><br>
 
                         <button class=" bg-blue-500 hover:bg-blue-700 rounded-lg shadow-lg py-2 px-3 text-white font-bold mt-3 focus:outline-none focus:shadow-outline"
-                                type="submit">Sell
+                                type="submit">Close
                         </button>
                     </div>
                 </div>
