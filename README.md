@@ -14,7 +14,7 @@
 
 <ol>
 <li>PHP 7.4 or higher</li>
-<li>MySQL 8.0.25</li>
+<li>MySQL 5.7.39</li>
 <li>Composer</li>
 </ol>
 
