@@ -25,7 +25,7 @@
 2. Navigate to the project directory and install the project dependencies using Composer:
 `composer install`
 3. Import the databse.sql
-`mysql -u myuser -p mydatabase < database.sql`
+`SQL SCRIPTS -> Run SQL Script`
 5. Configure .env_example and rename the file to .env
 
 ## Preview
