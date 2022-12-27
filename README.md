@@ -25,7 +25,7 @@
 2. Navigate to the project directory and install the project dependencies using Composer:
 `composer install`
 3. Import the databse.sql
-`SQL SCRIPTS -> Run SQL Script`
+`SQL Scripts -> Run SQL Script`
 5. Configure .env_example and rename the file to .env
 
 ## Preview
