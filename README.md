@@ -2,13 +2,7 @@
 
 ## In this App you can:
 
-*Registr new account<br>
-*Login<br>
-*Find your favorite crypto.<br>
-*Buy and Sell crypto.<br>
-*Open and Close Short positions on your crypto.<br>
-*Transfer your crypto to another user.<br>
-*Receive crypto from another user.<br>
+Project is a platform for buying, selling, and trading cryptocurrencies. Users can register for a new account and then log in to access the platform. They can find their favorite cryptocurrencies and engage in various transactions, such as buying and selling, opening and closing short positions, and transferring cryptocurrencies to and from other users.
 
 ## Technologies used:
 
